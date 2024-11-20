@@ -10,9 +10,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: normal;
-  justify-content: flex-end;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   background-color: #fefefe;
 }
