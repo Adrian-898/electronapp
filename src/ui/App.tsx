@@ -7,36 +7,21 @@ const App = () => {
     <>
       <div id="app" className="p-5">
         <div id="content" className="row g-0">
-          <div className="tab-content">
-            <div
-              className="tab-pane"
-              id="home"
-              role="tabpanel"
-              aria-labelledby="home-tab"
-            >
+          <section id="tabContent" className="tab-content">
+            <div className="tab-pane show active" id="home" role="tabpanel">
               {<Home />}
             </div>
-            <div
-              className="tab-pane"
-              id="scanner"
-              role="tabpanel"
-              aria-labelledby="scanner-tab"
-            >
+            <div className="tab-pane" id="scanner" role="tabpanel">
               {<QRScanner />}
             </div>
-            <div
-              className="tab-pane"
-              id="map"
-              role="tabpanel"
-              aria-labelledby="map-tab"
-            >
+            <div className="tab-pane" id="map" role="tabpanel">
               {<Map />}
             </div>
-          </div>
+          </section>
         </div>
       </div>
 
-      <div id="tabBar" className="row fixed-bottom">
+      <section id="tabBar" className="row fixed-bottom">
         <ol
           className="nav nav-tabs nav-underline justify-content-evenly bg-light border-2 border-top border-dark-subtle"
           id="tabButtons"
@@ -50,8 +35,6 @@ const App = () => {
               data-bs-target="#scanner"
               type="button"
               role="tab"
-              aria-controls="scanner"
-              aria-current="page"
             >
               <i
                 className="bi bi-camera"
@@ -63,13 +46,12 @@ const App = () => {
 
           <li className="nav-item" role="presentation">
             <button
-              className="nav-link fs-1 fw-bold d-flex  align-items-center active px-2"
+              className="nav-link fs-1 fw-bold d-flex  align-items-center px-2 active"
               id="home-tab"
               data-bs-toggle="tab"
               data-bs-target="#home"
               type="button"
               role="tab"
-              aria-controls="home"
             >
               <i
                 className="bi bi-house-door"
@@ -87,7 +69,6 @@ const App = () => {
               data-bs-target="#map"
               type="button"
               role="tab"
-              aria-controls="map"
             >
               <i
                 className="bi bi-geo-alt"
@@ -97,7 +78,7 @@ const App = () => {
             </button>
           </li>
         </ol>
-      </div>
+      </section>
     </>
   );
 };

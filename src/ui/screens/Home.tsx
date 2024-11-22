@@ -2,8 +2,8 @@ const Home = () => {
   return (
     <div id="home" className="container">
       {/* Modal */}
-      <div className="modal fade" id="modal" aria-labelledby="modalTitle">
-        <div className="modal-dialog modal-dialog-centered">
+      <section id="modal" className="modal fade" role="dialog">
+        <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-1 fw-bold" id="modalTitle">
@@ -28,28 +28,33 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* header con mensaje e icono de info para el modal*/}
-      <div id="header" className="row justify-content-between">
-        <div className="col-10 fs-1 fw-bold align-self-center">
-          Bienvenido, Usuario!
+      {/* header con mensaje de bienvenida e icono de info para abrir el modal*/}
+      <section id="header" className="row pb-5 justify-content-evenly">
+        <div className="col-6 justify-content-center d-flex">
+          <div className="fs-1 fw-bold bg-dark-subtle p-3 rounded-4 align-self-center">
+            Bienvenido, Usuario!
+          </div>
         </div>
-        <div className="col-2">
+        <div className="col-2 justify-content-center d-flex">
           <i
-            className="bi bi-info-circle m-5 button"
+            className="bi bi-info-circle bg-dark-subtle p-3 rounded-4 border border-2 border-dark d-flex"
             style={{ fontSize: 80 }}
             data-bs-toggle="modal"
             data-bs-target="#modal"
           ></i>
         </div>
-      </div>
+      </section>
 
       {/* menu de botones */}
-      <div id="content" className="row mt-5 justify-content-center">
+      <section id="content" className="row mt-5 justify-content-center">
         <div id="emergencias" className="row justify-content-center mb-4">
-          <div className="col-2">
-            <i className="bi bi-hospital m-5" style={{ fontSize: 80 }}></i>
+          <div className="col-2 justify-content-center d-flex">
+            <i
+              className="bi bi-hospital bg-dark-subtle p-3 rounded-4 d-flex"
+              style={{ fontSize: 80 }}
+            ></i>
           </div>
           <div className="col-4 align-self-center">
             <a
@@ -64,8 +69,11 @@ const Home = () => {
         </div>
 
         <div id="parquimetro" className="row justify-content-center mb-4">
-          <div className="col-2">
-            <i className="bi bi-car-front m-5" style={{ fontSize: 80 }}></i>
+          <div className="col-2 justify-content-center d-flex">
+            <i
+              className="bi bi-car-front bg-dark-subtle p-3 rounded-4 d-flex"
+              style={{ fontSize: 80 }}
+            ></i>
           </div>
           <div className="col-4 align-self-center">
             <a
@@ -80,9 +88,9 @@ const Home = () => {
         </div>
 
         <div id="servicios" className="row justify-content-center mb-4">
-          <div className="col-2">
+          <div className="col-2 justify-content-center d-flex">
             <i
-              className="bi bi-lightbulb-fill m-5"
+              className="bi bi-lightbulb bg-dark-subtle p-3 rounded-4 d-flex"
               style={{ fontSize: 80 }}
             ></i>
           </div>
@@ -99,8 +107,11 @@ const Home = () => {
         </div>
 
         <div id="comercio" className="row justify-content-center mb-4">
-          <div className="col-2">
-            <i className="bi bi-shop m-5" style={{ fontSize: 80 }}></i>
+          <div className="col-2 justify-content-center d-flex">
+            <i
+              className="bi bi-shop bg-dark-subtle p-3 rounded-4 d-flex"
+              style={{ fontSize: 80 }}
+            ></i>
           </div>
           <div className="col-4 align-self-center">
             <a
@@ -115,9 +126,9 @@ const Home = () => {
         </div>
 
         <div id="denuncias" className="row justify-content-center mb-4">
-          <div className="col-2">
+          <div className="col-2 justify-content-center d-flex">
             <i
-              className="bi bi-person-exclamation m-5"
+              className="bi bi-person-exclamation bg-dark-subtle p-3 rounded-4 d-flex"
               style={{ fontSize: 80 }}
             ></i>
           </div>
@@ -134,9 +145,9 @@ const Home = () => {
         </div>
 
         <div id="multas" className="row justify-content-center mb-4">
-          <div className="col-2">
+          <div className="col-2 justify-content-center d-flex">
             <i
-              className="bi bi-sign-no-parking m-5"
+              className="bi bi-sign-no-parking bg-dark-subtle p-3 rounded-4 d-flex"
               style={{ fontSize: 80 }}
             ></i>
           </div>
@@ -151,7 +162,7 @@ const Home = () => {
             </a>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
