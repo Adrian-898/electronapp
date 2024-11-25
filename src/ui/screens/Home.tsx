@@ -32,14 +32,13 @@ const Home = () => {
 
       {/* header con mensaje de bienvenida e icono de info para abrir el modal*/}
       <section id="header" className="row pb-5 justify-content-evenly">
-        <div className="col-6 justify-content-center d-flex">
-          <div className="fs-1 fw-bold bg-dark-subtle p-3 rounded-4 align-self-center">
-            Bienvenido, Usuario!
-          </div>
+        <div className="col-6 fs-1 fw-bold bg-dark-subtle p-2 rounded-4 justify-content-center align-self-center d-flex">
+          Bienvenido, Usuario!
         </div>
+
         <div className="col-2 justify-content-center d-flex">
           <i
-            className="bi bi-info-circle bg-dark-subtle p-3 rounded-4 border border-2 border-dark d-flex"
+            className="bi bi-info-circle bg-dark-subtle p-2 rounded-4 border border-2 border-dark d-flex"
             style={{ fontSize: 80 }}
             data-bs-toggle="modal"
             data-bs-target="#modal"

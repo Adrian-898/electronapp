@@ -1,6 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 const QRScanner = () => {
+  /*
   // estado de escaneo de QR, se usa para mostrar el botón de escaneo de nuevo
   const [scanned, setScanned] = useState<boolean>(false);
 
@@ -18,6 +19,7 @@ const QRScanner = () => {
     try {
     } catch (error) {}
   };
+  */
 
   return (
     <div id="QRScanner" className="container">
@@ -78,11 +80,7 @@ const QRScanner = () => {
               >
                 Cerrar
               </button>
-              <button
-                type="button"
-                className="btn btn-primary fs-1 fw-bold"
-                onClick={() => handleSubmit}
-              >
+              <button type="button" className="btn btn-primary fs-1 fw-bold">
                 Buscar
               </button>
             </section>
@@ -91,7 +89,7 @@ const QRScanner = () => {
       </section>
 
       <section id="header" className="row">
-        <div className="text-center fs-1 fw-bold bg-dark-subtle p-4 rounded-4">
+        <div className="text-center fs-1 fw-bold bg-dark-subtle p-2 rounded-4">
           Escanea un código QR / Ingresa los datos
         </div>
       </section>
@@ -105,7 +103,7 @@ const QRScanner = () => {
           {
             <button
               type="button"
-              className="btn btn-primary fs-1 fw-bold align-self-center p-4 rounded-4 border-2 border-dark d-flex"
+              className="btn btn-primary fs-1 fw-bold align-self-center p-3 rounded-4 border-2 border-dark d-flex"
             >
               Escanear nuevamente
             </button>
