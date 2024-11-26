@@ -1,30 +1,47 @@
-// import { useState } from "react";
+import { useState } from "react";
+import { Scanner } from "@yudiel/react-qr-scanner";
+import getErrorMessage from "../../utils/getErrorMessage";
 
 const QRScanner = () => {
-  /*
   // estado de escaneo de QR, se usa para mostrar el botón de escaneo de nuevo
   const [scanned, setScanned] = useState<boolean>(false);
+  // datos del form
+  const [parquimetro, setParquimetro] = useState<string>("");
+  const [puesto, setPuesto] = useState<string | number>("");
 
   // funcion ejecutada al leer un QR
-  const handleBarCodeScan = () => {
+  const handleBarCodeScan = (result: string) => {
     setScanned(true);
+
+    if (result) {
+      // Aquí puedes hacer lo que desees con el resultado del QR
+      console.log(result);
+    } else {
+      setScanned(false);
+    }
   };
 
-  const handleSubmit = async (
-    parquimetro: string,
-    puesto: number | undefined
-  ) => {
-    const url = `https://${parquimetro}/${puesto}`;
-
-    try {
-    } catch (error) {}
+  const handleError = (error: unknown) => {
+    console.error("Ha ocurrido un error: ", getErrorMessage(error));
   };
-  */
+
+  const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (parquimetro !== "" && puesto !== "") {
+      const url = `https://${parquimetro}/${puesto}`;
+
+      try {
+        console.log(url);
+      } catch (error) {
+        console.error("Ha ocurrido un error: ", getErrorMessage(error));
+      }
+    }
+  };
 
   return (
     <div id="QRScanner" className="container">
       {/* Modal */}
-      <section id="inputModal" className="modal fade" role="form">
+      <section id="inputModal" className="modal fade" role="dialog">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <section className="modal-header">
@@ -32,17 +49,22 @@ const QRScanner = () => {
                 Ingresa tus datos:
               </h1>
             </section>
+
             <section className="modal-body">
               <div className="container-fluid">
-                <div className="row mb-3">
-                  <form id="parquimetroForm">
+                <form id="parquimetroForm" onSubmit={handleForm}>
+                  <div className="row mb-3">
                     <label htmlFor="parquimetro" className="form-label fs-2">
                       Parquímetro
                     </label>
                     <select
                       id="parquimetro"
+                      required
                       className="form-select form-select-lg fs-3 border-1 border-dark-subtle"
+                      value={parquimetro}
+                      onChange={(e) => setParquimetro(e.target.value)}
                     >
+                      <option value={""}>Selecciona una opción</option>
                       <option value="P1">Parquímetro 1</option>
                       <option value="P2">Parquímetro 2</option>
                       <option value="P3">Parquímetro 3</option>
@@ -53,25 +75,28 @@ const QRScanner = () => {
                     <div className="form-text text-danger">
                       espacio para mensajes de error al usuario
                     </div>
-                  </form>
-                </div>
-                <div className="row">
-                  <form id="numeroPuestoForm">
+                  </div>
+                  <div className="row">
                     <label htmlFor="numeroPuesto" className="form-label fs-2">
                       Número de puesto
                     </label>
                     <input
                       id="numeroPuesto"
-                      type="text"
+                      type="number"
+                      required
+                      placeholder="Ingresa tu puesto"
                       className="form-control form-control-lg fs-3 border-1 border-dark-subtle"
+                      value={puesto}
+                      onChange={(e) => setPuesto(e.target.valueAsNumber)}
                     />
                     <div className="form-text text-danger">
                       espacio para mensajes de error al usuario
                     </div>
-                  </form>
-                </div>
+                  </div>
+                </form>
               </div>
             </section>
+
             <section className="modal-footer justify-content-evenly">
               <button
                 type="button"
@@ -80,7 +105,11 @@ const QRScanner = () => {
               >
                 Cerrar
               </button>
-              <button type="button" className="btn btn-primary fs-1 fw-bold">
+              <button
+                type="submit"
+                className="btn btn-primary fs-1 fw-bold"
+                form="parquimetroForm"
+              >
                 Buscar
               </button>
             </section>
@@ -95,19 +124,48 @@ const QRScanner = () => {
       </section>
 
       <section
+        id="body"
+        className="row container-fluid justify-content-center my-5"
+      >
+        {/* Componente que muestra la camara en pantalla y permite el escaneo */}
+        <Scanner
+          onScan={() => handleBarCodeScan}
+          onError={() => handleError}
+          formats={["qr_code"]}
+          paused={scanned}
+          components={{ audio: false }}
+          allowMultiple={false}
+          styles={{
+            container: {
+              width: "75%",
+              placeContent: "center",
+              placeSelf: "center",
+            },
+            video: { overflow: "auto" },
+          }}
+        />
+      </section>
+
+      <section
         id="footer"
         className="row fixed-bottom"
         style={{ marginBottom: 142.333 }}
       >
         <div className="d-flex justify-content-evenly my-5">
           {
-            <button
-              type="button"
-              className="btn btn-primary fs-1 fw-bold align-self-center p-3 rounded-4 border-2 border-dark d-flex"
-            >
-              Escanear nuevamente
-            </button>
+            // Al escanear un código, se pausa el escaneo hasta presionar el boton
+            scanned && (
+              <button
+                type="button"
+                className="btn btn-primary fs-1 fw-bold align-self-center p-3 rounded-4 border-2 border-dark d-flex"
+                onClick={() => setScanned(false)}
+              >
+                Escanear nuevamente
+              </button>
+            )
           }
+
+          {/* icono que abre el modal */}
           <i
             className="bi bi-input-cursor-text p-3 bg-dark-subtle rounded-4 border border-2 border-dark d-flex"
             style={{ fontSize: 80 }}
