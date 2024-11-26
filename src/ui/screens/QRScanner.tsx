@@ -72,9 +72,6 @@ const QRScanner = () => {
                       <option value="P5">Parquímetro 5</option>
                       <option value="P6">Parquímetro 6</option>
                     </select>
-                    <div className="form-text text-danger">
-                      espacio para mensajes de error al usuario
-                    </div>
                   </div>
                   <div className="row">
                     <label htmlFor="numeroPuesto" className="form-label fs-2">
@@ -84,14 +81,12 @@ const QRScanner = () => {
                       id="numeroPuesto"
                       type="number"
                       required
+                      min={1}
                       placeholder="Ingresa tu puesto"
                       className="form-control form-control-lg fs-3 border-1 border-dark-subtle"
                       value={puesto}
                       onChange={(e) => setPuesto(e.target.valueAsNumber)}
                     />
-                    <div className="form-text text-danger">
-                      espacio para mensajes de error al usuario
-                    </div>
                   </div>
                 </form>
               </div>
@@ -117,7 +112,7 @@ const QRScanner = () => {
         </div>
       </section>
 
-      <section id="header" className="row">
+      <section id="header" className="row container justify-content-center">
         <div className="text-center fs-1 fw-bold bg-dark-subtle p-2 rounded-4">
           Escanea un código QR / Ingresa los datos
         </div>
@@ -149,9 +144,9 @@ const QRScanner = () => {
       <section
         id="footer"
         className="row fixed-bottom"
-        style={{ marginBottom: 142.333 }}
+        style={{ bottom: 142.333 }}
       >
-        <div className="d-flex justify-content-evenly my-5">
+        <div className="d-flex justify-content-evenly mb-5">
           {
             // Al escanear un código, se pausa el escaneo hasta presionar el boton
             scanned && (

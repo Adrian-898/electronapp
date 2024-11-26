@@ -1,8 +1,28 @@
-//import React from "react";
-//import { Link } from "react-router-dom";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
-const Home = () => {
-  return <div>This is map page</div>;
+const Map = () => {
+  const position = { lat: 51.505, lng: -0.09, alt: 1 };
+
+  return (
+    <div id="map" className="container-fluid">
+      <MapContainer
+        center={position}
+        zoom={13}
+        style={{ height: "100vh", width: "100%" }}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <Marker position={position}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
+    </div>
+  );
 };
 
-export default Home;
+export default Map;
