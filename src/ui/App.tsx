@@ -5,21 +5,17 @@ import QRScanner from "./screens/QRScanner";
 const App = () => {
   return (
     <>
-      <div id="app" className="p-5">
-        <div id="content" className="row g-0">
-          <section id="tabContent" className="tab-content">
-            <div className="tab-pane show active" id="home" role="tabpanel">
-              {<Home />}
-            </div>
-            <div className="tab-pane" id="scanner" role="tabpanel">
-              {<QRScanner />}
-            </div>
-            <div className="tab-pane" id="map" role="tabpanel">
-              {<Map />}
-            </div>
-          </section>
+      <section id="tabContent" className="row tab-content h-100">
+        <div className="tab-pane show active" id="home" role="tabpanel">
+          {<Home />}
         </div>
-      </div>
+        <div className="tab-pane" id="scanner" role="tabpanel">
+          {<QRScanner />}
+        </div>
+        <div className="tab-pane" id="map" role="tabpanel">
+          {<Map />}
+        </div>
+      </section>
 
       <section id="tabBar" className="row fixed-bottom">
         <ol

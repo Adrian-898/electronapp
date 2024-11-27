@@ -39,7 +39,7 @@ const QRScanner = () => {
   };
 
   return (
-    <div id="QRScanner" className="container">
+    <div id="QRScanner" className="container p-5" style={{ bottom: 142.333 }}>
       {/* Modal */}
       <section id="inputModal" className="modal fade" role="dialog">
         <div className="modal-dialog modal-dialog-centered">
