@@ -3,7 +3,7 @@
   "copyright": "Copyright ©2024 Adrian Torres",
   "appId": "com.stc.app-la-guaira",
   "files": ["dist-electron", "dist-react"],
-  "icon": "./src/ui/assets/windows-icon.png",
+  "icon": "./src/ui/assets/images/windows-icon.png",
   "win": {
     "target": ["portable", "msi"]
   }
