@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import "leaflet-routing-machine";
+import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import type { Map } from "leaflet";
 
 // objeto para almacenar informacion de los lugares que se quiere marcar en el mapa
@@ -21,6 +24,7 @@ const lugares: Lugar[] = [
 ];
 
 const Mapa = () => {
+  // Coordenadas donde se centra el mapa al cargar
   const position = { lat: 10.597032, lng: -66.930431 };
 
   // estado del ref del mapa en el DOM, se usa para corregir un error de leaflet.
@@ -31,10 +35,23 @@ const Mapa = () => {
     if (map) {
       const i = setInterval(() => {
         map.invalidateSize(true);
-      }, 200);
+      }, 100);
       return () => clearInterval(i);
     }
   }, [map]);
+
+  // ruta a trazar en el mapa
+  const Route = () => {
+    if (map) {
+      L.Routing.control({
+        waypoints: [L.latLng(lugares[0].coords), L.latLng(lugares[1].coords)],
+        fitSelectedRoutes: false,
+        show: false,
+        language: "es",
+      }).addTo(map);
+    }
+    return null;
+  };
 
   return (
     <div id="map" className="fixed-top" style={{ bottom: 142.333 }}>
@@ -64,6 +81,7 @@ const Mapa = () => {
             </Marker>
           ))
         }
+        <Route />
       </MapContainer>
     </div>
   );
