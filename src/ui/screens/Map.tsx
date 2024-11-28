@@ -30,16 +30,6 @@ const Mapa = () => {
   // estado del ref del mapa en el DOM, se usa para corregir un error de leaflet.
   const [map, setMap] = useState<Map | null>(null);
 
-  // esta funcion corrige un error de leaflet que no centra el mapa al montar el componente y aparece todo en la esquina superior izquierda del contenedor.
-  useEffect(() => {
-    if (map) {
-      const i = setInterval(() => {
-        map.invalidateSize(true);
-      }, 100);
-      return () => clearInterval(i);
-    }
-  }, [map]);
-
   // se agrega a la instancia del mapa la ruta a trazar
   useEffect(() => {
     if (map) {
@@ -50,6 +40,12 @@ const Mapa = () => {
         showAlternatives: false,
         language: "es",
       }).addTo(map);
+
+      // esta funcion corrige un error de leaflet que no centra el mapa al montar el componente y aparece todo en la esquina superior izquierda del contenedor.
+      const i = setInterval(() => {
+        map.invalidateSize(true);
+      }, 500);
+      return () => clearInterval(i);
     }
   }, [map]); // Este useEffect se ejecuta solo una vez cuando el mapa está listo.
 
@@ -61,12 +57,14 @@ const Mapa = () => {
         zoom={16}
         scrollWheelZoom={false}
         className="h-100"
+        touchZoom
+        bounceAtZoomLimits
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {
+        {/*
           // itera el arreglo lugares y renderiza un pin para cada instancia existente
           lugares.map((lugar, index) => (
             <Marker
@@ -80,7 +78,7 @@ const Mapa = () => {
               <Popup>{lugar.name}</Popup>
             </Marker>
           ))
-        }
+        */}
       </MapContainer>
     </div>
   );

@@ -112,34 +112,38 @@ const QRScanner = () => {
         </div>
       </section>
 
-      <section id="header" className="row container justify-content-center">
+      <section
+        id="header"
+        className="row container justify-content-center pb-5 mb-5"
+      >
         <div className="text-center fs-1 fw-bold bg-dark-subtle p-2 rounded-4">
           Escanea un código QR / Ingresa los datos
         </div>
       </section>
 
-      <section
-        id="body"
-        className="row container-fluid justify-content-center pt-5 my-5"
-      >
-        {/* Componente que muestra la camara en pantalla y permite el escaneo */}
-        <Scanner
-          onScan={() => handleBarCodeScan}
-          onError={() => handleError}
-          formats={["qr_code"]}
-          paused={scanned}
-          components={{ audio: false }}
-          allowMultiple={false}
-          styles={{
-            container: {
-              width: "75%",
-              placeContent: "center",
-              placeSelf: "center",
-            },
-            video: { overflow: "auto" },
-          }}
-        />
-      </section>
+      {/* Componente que muestra la camara en pantalla y permite el escaneo */}
+      <Scanner
+        onScan={() => handleBarCodeScan}
+        onError={() => handleError}
+        formats={["qr_code"]}
+        paused={scanned}
+        components={{ audio: false }}
+        allowMultiple={false}
+        styles={{
+          container: {
+            marginTop: "5%",
+            width: "90%",
+            placeSelf: "center",
+          },
+          video: {
+            zIndex: -1,
+            overflow: "visible",
+            position: "fixed",
+            width: "100%",
+            height: "100%",
+          },
+        }}
+      />
 
       <section
         id="footer"
