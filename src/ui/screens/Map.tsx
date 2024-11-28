@@ -40,18 +40,18 @@ const Mapa = () => {
     }
   }, [map]);
 
-  // ruta a trazar en el mapa
-  const Route = () => {
+  // se agrega a la instancia del mapa la ruta a trazar
+  useEffect(() => {
     if (map) {
       L.Routing.control({
         waypoints: [L.latLng(lugares[0].coords), L.latLng(lugares[1].coords)],
         fitSelectedRoutes: false,
         show: false,
+        showAlternatives: false,
         language: "es",
       }).addTo(map);
     }
-    return null;
-  };
+  }, [map]); // Este useEffect se ejecuta solo una vez cuando el mapa está listo.
 
   return (
     <div id="map" className="fixed-top" style={{ bottom: 142.333 }}>
@@ -81,7 +81,6 @@ const Mapa = () => {
             </Marker>
           ))
         }
-        <Route />
       </MapContainer>
     </div>
   );
