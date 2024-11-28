@@ -11,11 +11,11 @@ const Home = () => {
               </h1>
             </div>
             <div className="modal-body fs-2">
-              Bienvenido a tu App La Guaira, aquí encontrarás distintos
-              servicios a los que puedes acceder desde los botones disponibles
-              en esta pantalla, en la barra de navegación abajo podrás acceder a
-              las secciones QR y Ubicación. Para salir al menú, presiona el
-              botón "Cerrar".
+              Bienvenido al módulo de autogestión App la guaira, aquí
+              encontrarás distintos servicios a los que puedes acceder desde los
+              botones disponibles en esta pantalla, en la barra de navegación
+              abajo podrás acceder a las secciones QR y Ubicación. Para salir al
+              menú, presiona el botón "Cerrar".
             </div>
             <div className="modal-footer">
               <button
@@ -32,13 +32,13 @@ const Home = () => {
 
       {/* header con mensaje de bienvenida e icono de info para abrir el modal*/}
       <section id="header" className="row pb-5 justify-content-evenly">
-        <div className="col-6 fs-1 fw-bold bg-dark-subtle p-2 rounded-4 justify-content-center align-self-center d-flex">
+        <div className="col-5 fs-1 fw-bold bg-dark-subtle p-2 rounded-4 justify-content-center align-self-center d-flex">
           Bienvenido, Usuario!
         </div>
 
         <div className="col-2 justify-content-center d-flex">
           <i
-            className="bi bi-info-circle bg-dark-subtle p-2 rounded-4 border border-2 border-dark d-flex"
+            className="bi bi-info-circle bg-dark-subtle p-2 rounded-4 border border-2 border-dark align-self-center d-flex"
             style={{ fontSize: 80 }}
             data-bs-toggle="modal"
             data-bs-target="#modal"

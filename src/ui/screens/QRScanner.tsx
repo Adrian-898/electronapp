@@ -120,7 +120,7 @@ const QRScanner = () => {
 
       <section
         id="body"
-        className="row container-fluid justify-content-center my-5"
+        className="row container-fluid justify-content-center pt-5 my-5"
       >
         {/* Componente que muestra la camara en pantalla y permite el escaneo */}
         <Scanner
