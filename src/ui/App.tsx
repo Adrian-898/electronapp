@@ -25,7 +25,7 @@ const App = () => {
         >
           <li className="nav-item" role="presentation">
             <button
-              className="nav-link fs-1 fw-bold d-flex align-items-center px-5"
+              className="nav-link fs-1 fw-bold d-flex align-items-center px-4"
               id="scanner-tab"
               data-bs-toggle="tab"
               data-bs-target="#scanner"
@@ -42,7 +42,7 @@ const App = () => {
 
           <li className="nav-item" role="presentation">
             <button
-              className="nav-link fs-1 fw-bold d-flex  align-items-center px-5 active"
+              className="nav-link fs-1 fw-bold d-flex  align-items-center px-4 active"
               id="home-tab"
               data-bs-toggle="tab"
               data-bs-target="#home"
@@ -59,7 +59,7 @@ const App = () => {
 
           <li className="nav-item" role="presentation">
             <button
-              className="nav-link fs-1 fw-bold d-flex  align-items-center px-5"
+              className="nav-link fs-1 fw-bold d-flex  align-items-center px-4"
               id="map-tab"
               data-bs-toggle="tab"
               data-bs-target="#map"
