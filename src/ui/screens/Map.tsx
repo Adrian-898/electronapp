@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import L from "leaflet";
-import "leaflet-routing-machine";
-import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
-import type { Map } from "leaflet";
+import { useState, useCallback, memo } from "react";
+import {
+  // DirectionsRenderer,
+  // DirectionsService,
+  GoogleMap,
+  useJsApiLoader,
+} from "@react-google-maps/api";
+// import getErrorMessage from "../../utils/getErrorMessage";
 
 // objeto para almacenar informacion de los lugares que se quiere marcar en el mapa
 type Lugar = {
   coords: { lat: number; lng: number };
-  name: string;
+  name: string | undefined;
 };
 
 // De aqui se obtienen las coordenadas y el nombre de los lugares para crear los Pins en el mapa
@@ -23,65 +25,48 @@ const lugares: Lugar[] = [
   },
 ];
 
-const Mapa = () => {
+function Mapa() {
   // Coordenadas donde se centra el mapa al cargar
-  const position = { lat: 10.597032, lng: -66.930431 };
+  const [position, _setPosition] = useState<Lugar>(lugares[0]);
 
-  // estado del ref del mapa en el DOM, se usa para corregir un error de leaflet.
-  const [map, setMap] = useState<Map | null>(null);
+  // instancia del mapa
+  const [_map, setMap] = useState<google.maps.Map | null>(null);
 
-  // se agrega a la instancia del mapa la ruta a trazar
-  useEffect(() => {
-    if (map) {
-      L.Routing.control({
-        waypoints: [L.latLng(lugares[0].coords), L.latLng(lugares[1].coords)],
-        fitSelectedRoutes: false,
-        show: false,
-        showAlternatives: false,
-        language: "es",
-      }).addTo(map);
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyB-HqJBWka1qdhm5ZX7p5G1WFfOdoeBrSw",
+    language: "es",
+    region: "VE",
+  });
 
-      // esta funcion corrige un error de leaflet que no centra el mapa al montar el componente y aparece todo en la esquina superior izquierda del contenedor.
-      const i = setInterval(() => {
-        map.invalidateSize(true);
-      }, 500);
-      return () => clearInterval(i);
-    }
-  }, [map]); // Este useEffect se ejecuta solo una vez cuando el mapa está listo.
+  const onLoad = useCallback((map: any) => {
+    setMap(map);
+  }, []);
 
-  return (
-    <div id="map" className="fixed-top" style={{ bottom: 142.333 }}>
-      <MapContainer
-        ref={setMap}
-        center={position}
+  const onUnmount = useCallback((_map: google.maps.Map) => {
+    setMap(null);
+  }, []);
+
+  return isLoaded ? (
+    <div className="fixed-top" style={{ bottom: 142.333 }}>
+      <GoogleMap
+        mapContainerStyle={{ height: "100%" }}
+        center={position.coords}
         zoom={16}
-        scrollWheelZoom={false}
-        className="h-100"
-        touchZoom
-        bounceAtZoomLimits
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {/*
-          // itera el arreglo lugares y renderiza un pin para cada instancia existente
-          lugares.map((lugar, index) => (
-            <Marker
-              key={index}
-              title={lugar.name}
-              position={{
-                lat: lugar.coords.lat,
-                lng: lugar.coords.lng,
-              }}
-            >
-              <Popup>{lugar.name}</Popup>
-            </Marker>
-          ))
-        */}
-      </MapContainer>
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+        options={{
+          clickableIcons: false,
+          controlSize: 100,
+          fullscreenControl: false,
+          keyboardShortcuts: false,
+          mapTypeId: google.maps.MapTypeId.HYBRID,
+        }}
+      ></GoogleMap>
     </div>
+  ) : (
+    <></>
   );
-};
+}
 
-export default Mapa;
+export default memo(Mapa);

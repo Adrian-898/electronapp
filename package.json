@@ -17,6 +17,7 @@
     "dist:win": "npm run transpile:electron && npm run build && electron-builder --win --x64"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.20.3",
     "@yudiel/react-qr-scanner": "^2.0.8",
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
