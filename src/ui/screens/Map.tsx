@@ -3,6 +3,7 @@ import {
   // DirectionsRenderer,
   // DirectionsService,
   GoogleMap,
+  Marker,
   useJsApiLoader,
 } from "@react-google-maps/api";
 // import getErrorMessage from "../../utils/getErrorMessage";
@@ -32,8 +33,9 @@ function Mapa() {
   // instancia del mapa
   const [_map, setMap] = useState<google.maps.Map | null>(null);
 
+  // configuración para renderizar el mapa una vez esté cargado
   const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
+    id: "la-guaira-map-script",
     googleMapsApiKey: "AIzaSyB-HqJBWka1qdhm5ZX7p5G1WFfOdoeBrSw",
     language: "es",
     region: "VE",
@@ -50,6 +52,7 @@ function Mapa() {
   return isLoaded ? (
     <div className="fixed-top" style={{ bottom: 142.333 }}>
       <GoogleMap
+        id="la-guaira-map"
         mapContainerStyle={{ height: "100%" }}
         center={position.coords}
         zoom={16}
@@ -60,9 +63,15 @@ function Mapa() {
           controlSize: 100,
           fullscreenControl: false,
           keyboardShortcuts: false,
-          mapTypeId: google.maps.MapTypeId.HYBRID,
+          streetViewControl: false,
         }}
-      ></GoogleMap>
+      >
+        {lugares.map((lugar, index) => {
+          return (
+            <Marker key={index} position={lugar.coords} title={lugar.name} />
+          );
+        })}
+      </GoogleMap>
     </div>
   ) : (
     <></>
