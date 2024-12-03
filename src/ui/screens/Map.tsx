@@ -1,12 +1,11 @@
-import { useState, useCallback, memo } from "react";
+import { useState } from "react";
 import {
-  // DirectionsRenderer,
-  // DirectionsService,
-  GoogleMap,
-  Marker,
-  useJsApiLoader,
-} from "@react-google-maps/api";
-// import getErrorMessage from "../../utils/getErrorMessage";
+  APIProvider,
+  Map,
+  AdvancedMarker,
+  Pin,
+  InfoWindow,
+} from "@vis.gl/react-google-maps";
 
 // objeto para almacenar informacion de los lugares que se quiere marcar en el mapa
 type Lugar = {
@@ -26,56 +25,33 @@ const lugares: Lugar[] = [
   },
 ];
 
-function Mapa() {
-  // Coordenadas donde se centra el mapa al cargar
-  const [position, _setPosition] = useState<Lugar>(lugares[0]);
+const Mapa = () => {
+  const [open, setOpen] = useState(false);
 
-  // instancia del mapa
-  const [_map, setMap] = useState<google.maps.Map | null>(null);
-
-  // configuración para renderizar el mapa una vez esté cargado
-  const { isLoaded } = useJsApiLoader({
-    id: "la-guaira-map-script",
-    googleMapsApiKey: "AIzaSyB-HqJBWka1qdhm5ZX7p5G1WFfOdoeBrSw",
-    language: "es",
-    region: "VE",
-  });
-
-  const onLoad = useCallback((map: any) => {
-    setMap(map);
-  }, []);
-
-  const onUnmount = useCallback((_map: google.maps.Map) => {
-    setMap(null);
-  }, []);
-
-  return isLoaded ? (
-    <div className="fixed-top" style={{ bottom: 142.333 }}>
-      <GoogleMap
-        id="la-guaira-map"
-        mapContainerStyle={{ height: "100%" }}
-        center={position.coords}
-        zoom={16}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-        options={{
-          clickableIcons: false,
-          controlSize: 100,
-          fullscreenControl: false,
-          keyboardShortcuts: false,
-          streetViewControl: false,
-        }}
-      >
-        {lugares.map((lugar, index) => {
-          return (
-            <Marker key={index} position={lugar.coords} title={lugar.name} />
-          );
-        })}
-      </GoogleMap>
-    </div>
-  ) : (
-    <></>
+  return (
+    <APIProvider apiKey="AIzaSyB-HqJBWka1qdhm5ZX7p5G1WFfOdoeBrSw">
+      <div className="fixed-top" style={{ bottom: 142.333 }}>
+        <Map
+          mapId="4784455d1ad7fcca"
+          zoom={16}
+          center={lugares[0].coords}
+          style={{ height: "100%" }}
+        >
+          <AdvancedMarker
+            position={lugares[0].coords}
+            onClick={() => setOpen(true)}
+          >
+            <Pin
+              background={"lightblue"}
+              glyphColor={"#001f7e"}
+              borderColor={"#001f7e"}
+            />
+          </AdvancedMarker>
+          {open && <InfoWindow anchor={}></InfoWindow>}
+        </Map>
+      </div>
+    </APIProvider>
   );
-}
+};
 
-export default memo(Mapa);
+export default Mapa;
