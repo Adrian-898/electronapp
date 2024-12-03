@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  ZoomControl,
+  AttributionControl,
+} from "react-leaflet";
 import L from "leaflet";
 import "leaflet-routing-machine";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
@@ -60,7 +67,11 @@ const Mapa = () => {
         className="h-100"
         touchZoom
         bounceAtZoomLimits
+        zoomControl={false}
+        attributionControl={false}
       >
+        <AttributionControl position="bottomleft" />
+        <ZoomControl position="topright" />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -68,7 +79,18 @@ const Mapa = () => {
         {
           // itera el arreglo lugares y renderiza un pin para cada instancia existente
           lugares.map((lugar, index) => (
-            <Marker key={index} position={lugar.coords}>
+            <Marker
+              key={index}
+              position={lugar.coords}
+              eventHandlers={{
+                click: () => {
+                  console.log("marcador clickeado");
+                },
+                popupopen: () => {
+                  map?.flyTo(lugar.coords);
+                },
+              }}
+            >
               <Popup>{lugar.name}</Popup>
             </Marker>
           ))
