@@ -10,7 +10,10 @@ import {
 import L from "leaflet";
 import "leaflet-routing-machine";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
-import type { Map } from "leaflet";
+import type { Map, Icon } from "leaflet";
+import PersonIcon from "../assets/images/person-standing.svg";
+import MarkerIcon from "../assets/images/marker-icon-2x.png";
+import Shadow from "../assets/images/marker-shadow.png";
 
 // objeto para almacenar informacion de los lugares que se quiere marcar en el mapa
 type Lugar = {
@@ -31,11 +34,30 @@ const lugares: Lugar[] = [
 ];
 
 const Mapa = () => {
-  // Coordenadas donde se centra el mapa al cargar
-  const center = { lat: 10.597032, lng: -66.930431 };
+  // Coordenadas de la guaira
+  // const center = { lat: 10.597032, lng: -66.930431 };
 
   // estado del ref del mapa en el DOM, se usa para corregir un error de leaflet.
   const [map, setMap] = useState<Map | null>(null);
+
+  // icono a mostrar en la ubicación del usuario (ubicacion actual del modulo de autogestion)
+  const personIcon: Icon = new L.Icon({
+    iconUrl: PersonIcon,
+    iconSize: [45, 65],
+    iconAnchor: [22, 32],
+    shadowUrl: Shadow,
+    shadowAnchor: [14, 18],
+    popupAnchor: [0.5, -21],
+  });
+
+  // icono de los marcadores en el mapa
+  const markerIcon: Icon = new L.Icon({
+    iconUrl: MarkerIcon,
+    iconSize: [25, 40],
+    iconAnchor: [12, 41],
+    shadowUrl: Shadow,
+    popupAnchor: [1, -38],
+  });
 
   // se agrega a la instancia del mapa la ruta a trazar
   useEffect(() => {
@@ -61,7 +83,7 @@ const Mapa = () => {
       <MapContainer
         id="mapa-la-guaira"
         ref={setMap}
-        center={center}
+        center={lugares[0].coords}
         zoom={17}
         scrollWheelZoom={false}
         className="h-100"
@@ -82,6 +104,7 @@ const Mapa = () => {
             <Marker
               key={index}
               position={lugar.coords}
+              icon={lugar.name === "Usted está aquí" ? personIcon : markerIcon}
               eventHandlers={{
                 click: () => {
                   console.log("marcador clickeado");
