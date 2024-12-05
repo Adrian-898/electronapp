@@ -29,6 +29,10 @@ const lugares: Lugar[] = [
   },
   {
     coords: { lat: 10.60062, lng: -66.922652 },
+    name: "Lugar 1",
+  },
+  {
+    coords: { lat: 10.60172, lng: -66.922543 },
     name: "Lugar 2",
   },
 ];
@@ -39,6 +43,52 @@ const Mapa = () => {
 
   // estado del ref del mapa en el DOM, se usa para corregir un error de leaflet.
   const [map, setMap] = useState<Map | null>(null);
+
+  // destino establecido al que ir, una vez se selecciona un marcador
+  const [destination, setDestination] = useState<Lugar | undefined>();
+  const [newDestination, setNewDestination] = useState<Lugar | undefined>();
+
+  // estado visual (mostrado o no segun se toque un marcador del mapa) del boton para trazar ruta del usuario a un lugar determinado
+  const [drawRouteButton, setDrawRouteButton] = useState(false);
+
+  // estado de trazado de ruta del usuario a un lugar determinado (activo o no)
+  const [drawRoute, setDrawRoute] = useState(false);
+
+  const [routingControl, setRoutingControl] =
+    useState<L.Routing.Control | null>(null);
+
+  useEffect(() => {
+    if (map) {
+      // esta funcion corrige un error de leaflet que no centra el mapa al montar el componente y aparece todo en la esquina superior izquierda del contenedor.
+      const i = setInterval(() => {
+        map.invalidateSize(true);
+      }, 500);
+      return () => clearInterval(i);
+    }
+  }, [map]); // Este useEffect se ejecuta solo una vez cuando el mapa está listo.
+
+  useEffect(() => {
+    if (map) {
+      // Clear the routing control if it exists and drawRoute is false
+      if (routingControl && !drawRoute) {
+        map.removeControl(routingControl);
+        setRoutingControl(null);
+      }
+
+      // Add the routing control if drawRoute is true and no routing control exists
+      if (drawRoute && !routingControl) {
+        const control = L.Routing.control({
+          waypoints: [L.latLng(lugares[0].coords), L.latLng(lugares[1].coords)],
+          fitSelectedRoutes: true,
+          show: true,
+          showAlternatives: false,
+          language: "es",
+        }).addTo(map);
+
+        setRoutingControl(control); // Store the routing control reference
+      }
+    }
+  }, [map, drawRoute, routingControl]); // Add dependencies to the useEffect
 
   // icono a mostrar en la ubicación del usuario (ubicacion actual del modulo de autogestion)
   const personIcon: Icon = new L.Icon({
@@ -59,24 +109,37 @@ const Mapa = () => {
     popupAnchor: [1, -38],
   });
 
-  // se agrega a la instancia del mapa la ruta a trazar
-  useEffect(() => {
-    if (map) {
-      L.Routing.control({
-        waypoints: [L.latLng(lugares[0].coords), L.latLng(lugares[1].coords)],
-        fitSelectedRoutes: false,
-        show: false,
-        showAlternatives: false,
-        language: "es",
-      }).addTo(map);
+  // boton para trazar rutas
+  const DrawRouteButton = () => {
+    return (
+      <button
+        type="button"
+        className="btn btn-primary btn-lg position-absolute fixed-bottom m-5"
+        onClick={DrawRouteButtonPress}
+      >
+        Mostrar el camino a {newDestination?.name}
+      </button>
+    );
+  };
 
-      // esta funcion corrige un error de leaflet que no centra el mapa al montar el componente y aparece todo en la esquina superior izquierda del contenedor.
-      const i = setInterval(() => {
-        map.invalidateSize(true);
-      }, 500);
-      return () => clearInterval(i);
+  // al presionar el boton para trazar rutas
+  const DrawRouteButtonPress = () => {
+    setDrawRouteButton(false);
+    if (destination !== newDestination) {
+      setDestination(newDestination);
+      setDrawRoute(true);
     }
-  }, [map]); // Este useEffect se ejecuta solo una vez cuando el mapa está listo.
+  };
+
+  // al presionar un marcador
+  const MarkerPress = (lugar: Lugar) => {
+    if (destination?.name !== lugar?.name || destination.name === undefined) {
+      setNewDestination(lugar);
+      setDrawRouteButton(true);
+    } else {
+      setDrawRouteButton(false);
+    }
+  };
 
   return (
     <div id="map" className="fixed-top" style={{ bottom: 142.333 }}>
@@ -98,25 +161,37 @@ const Mapa = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
         {
           // itera el arreglo lugares y renderiza un pin para cada instancia existente
-          lugares.map((lugar, index) => (
-            <Marker
-              key={index}
-              position={lugar.coords}
-              icon={lugar.name === "Usted está aquí" ? personIcon : markerIcon}
-              eventHandlers={{
-                click: () => {
-                  console.log("marcador clickeado");
-                },
-                popupopen: () => {
-                  map?.flyTo(lugar.coords);
-                },
-              }}
-            >
-              <Popup>{lugar.name}</Popup>
-            </Marker>
-          ))
+          map &&
+            lugares.map((lugar, index) => (
+              <Marker
+                key={index}
+                position={lugar.coords}
+                icon={
+                  lugar.name === "Usted está aquí" ? personIcon : markerIcon
+                }
+                eventHandlers={{
+                  click: () => {
+                    console.log("marcador clickeado");
+                    lugar.name !== "Usted está aquí"
+                      ? MarkerPress(lugar)
+                      : null;
+                  },
+                  popupopen: () => {
+                    map.flyTo(lugar.coords);
+                  },
+                }}
+              >
+                <Popup>{lugar.name}</Popup>
+              </Marker>
+            ))
+        }
+
+        {
+          // muestra el boton de trazar ruta:
+          drawRouteButton && <DrawRouteButton />
         }
       </MapContainer>
     </div>
