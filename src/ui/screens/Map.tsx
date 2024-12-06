@@ -42,18 +42,20 @@ const Mapa = () => {
   const [map, setMap] = useState<Map | null>(null);
 
   // destino establecido al que ir, una vez se selecciona un marcador
-  const [destination, setDestination] = useState<Lugar | undefined>();
-  const [newDestination, setNewDestination] = useState<Lugar | undefined>();
+  const [destination, setDestination] = useState<Lugar | null>();
+  const [newDestination, setNewDestination] = useState<Lugar | null>();
 
   // estado visual (mostrado o no segun se toque un marcador del mapa) del boton para trazar ruta del usuario a un lugar determinado
   const [drawRouteButton, setDrawRouteButton] = useState(false);
 
+  // estado visual del boton para eliminar rutas trazadas
+  const [removeRouteButton, setRemoveRouteButton] = useState(false);
+
   // estado que controla la activacion del trazado de ruta de A a B
   const [drawRoute, setDrawRoute] = useState(false);
 
-  // estado de configuracion de trazado de rutas, establecido o no
-  const [routingControl, setRoutingControl] =
-    useState<L.Routing.Control | null>(null);
+  // estado de existencia de la ruta trazada y su configuracion
+  const [routing, setRouting] = useState<L.Routing.Control | null>(null);
 
   useEffect(() => {
     if (map) {
@@ -67,19 +69,13 @@ const Mapa = () => {
 
   useEffect(() => {
     if (map) {
-      // Clear the routing control if it exists and drawRoute is false
-      if (routingControl && drawRoute && destination === newDestination) {
-        map.removeControl(routingControl);
-        setRoutingControl(null);
-      }
-
-      // Add the routing control if drawRoute is true and no routing control exists
-      if (drawRoute && !routingControl && destination) {
+      // Agrega la ruta al mapa
+      if (drawRoute && destination && !routing) {
         let waypoints = [
           L.latLng(lugares[0].coords),
           L.latLng(destination.coords),
         ];
-        let control = L.Routing.control({
+        let routing = L.Routing.control({
           plan: L.Routing.plan(waypoints, {
             createMarker: () => false,
           }),
@@ -97,7 +93,8 @@ const Mapa = () => {
             }
           },
         }).addTo(map);
-        setRoutingControl(control); // Store the routing control reference
+        setRouting(routing);
+        setRemoveRouteButton(true);
       }
     }
   }, [map, drawRoute]); // Add dependencies to the useEffect
@@ -121,22 +118,9 @@ const Mapa = () => {
     popupAnchor: [1, -38],
   });
 
-  // boton para trazar rutas
-  const DrawRouteButton = () => {
-    return (
-      <button
-        type="button"
-        className="btn btn-primary btn-lg position-absolute fixed-bottom m-5"
-        onClick={DrawRouteButtonPress}
-      >
-        Mostrar el camino a {newDestination?.name}
-      </button>
-    );
-  };
-
   // al presionar un marcador
   const MarkerPress = (lugar: Lugar) => {
-    if (destination?.name !== lugar?.name || destination.name === undefined) {
+    if (destination?.name !== lugar?.name || destination?.name === undefined) {
       setNewDestination(lugar);
       setDrawRouteButton(true);
     } else {
@@ -144,7 +128,20 @@ const Mapa = () => {
     }
   };
 
-  // al presionar el boton para trazar rutas
+  // boton para trazar ruta:
+  const DrawRouteButton = () => {
+    return (
+      <button
+        type="button"
+        className="btn btn-primary btn-lg fs-2 position-absolute fixed-bottom m-5"
+        onClick={DrawRouteButtonPress}
+      >
+        Mostrar el camino a {newDestination?.name}
+      </button>
+    );
+  };
+
+  // al presionar el boton para trazar ruta:
   const DrawRouteButtonPress = () => {
     setDrawRouteButton(false);
     if (destination !== newDestination) {
@@ -153,26 +150,57 @@ const Mapa = () => {
     }
   };
 
+  // boton para eliminar ruta:
+  const RemoveRouteButton = () => {
+    return (
+      <button
+        type="button"
+        className="btn btn-secondary btn-lg fs-2 position-absolute fixed-bottom m-5"
+        onClick={RemoveRouteButtonPress}
+      >
+        Calcular nueva ruta (elimina la existente)
+      </button>
+    );
+  };
+
+  // al presionar el boton para eliminar ruta:
+  const RemoveRouteButtonPress = () => {
+    if (map && routing && removeRouteButton) {
+      setRemoveRouteButton(false);
+      map.removeControl(routing);
+      setRouting(null);
+      setDestination(null);
+      setDrawRoute(false);
+    }
+  };
+
   return (
     <div id="map" className="fixed-top" style={{ bottom: 142.333 }}>
       <MapContainer
         id="mapa-la-guaira"
+        className="h-100"
         ref={setMap}
         center={lugares[0].coords}
         zoom={17}
         scrollWheelZoom={false}
-        className="h-100"
         touchZoom
         bounceAtZoomLimits
         zoomControl={false}
         attributionControl={false}
       >
-        <AttributionControl position="bottomleft" />
-        <ZoomControl position="topright" />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+        <AttributionControl position="bottomleft" />
+
+        <ZoomControl position="topright" />
+
+        {
+          // muestra el boton de borrar ruta
+          removeRouteButton && <RemoveRouteButton />
+        }
 
         {
           // itera el arreglo lugares y renderiza un pin para cada instancia existente
@@ -182,20 +210,22 @@ const Mapa = () => {
                 key={index}
                 position={lugar.coords}
                 icon={
+                  // se renderiza un icono diferente para la posicion actual
                   lugar.name === "Usted está aquí" ? personIcon : markerIcon
                 }
                 eventHandlers={{
                   click: () => {
                     console.log("marcador clickeado");
+                    // se registra el click solo cuando es en un marcador distinto a la posicion actual.
                     lugar.name !== "Usted está aquí"
                       ? MarkerPress(lugar)
                       : null;
-                  },
-                  popupopen: () => {
+                    // centra el mapa al marcador selecionado
                     map.flyTo(lugar.coords);
                   },
                 }}
               >
+                {/* Muestra el nombre del lugar seleccionado */}
                 <Popup>{lugar.name}</Popup>
               </Marker>
             ))
@@ -203,7 +233,7 @@ const Mapa = () => {
 
         {
           // muestra el boton de trazar ruta:
-          drawRouteButton && <DrawRouteButton />
+          drawRouteButton && !removeRouteButton && <DrawRouteButton />
         }
       </MapContainer>
     </div>
