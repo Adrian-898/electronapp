@@ -3,7 +3,9 @@ import isDev from "./util.js";
 import path from "path";
 
 app.on("ready", () => {
-  const mainWindow = new BrowserWindow({});
+  const mainWindow = new BrowserWindow({
+    // frame: false,
+  });
   if (isDev()) {
     mainWindow.loadURL("http://localhost:8080");
   } else {

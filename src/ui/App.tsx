@@ -6,13 +6,13 @@ const App = () => {
   return (
     <>
       <section id="tabContent" className="row tab-content h-100">
-        <div className="tab-pane show active" id="home" role="tabpanel">
+        <div className="tab-pane show active" id="home">
           {<Home />}
         </div>
-        <div className="tab-pane" id="scanner" role="tabpanel">
+        <div className="tab-pane" id="scanner">
           {<QRScanner />}
         </div>
-        <div className="tab-pane" id="map" role="tabpanel">
+        <div className="tab-pane" id="map">
           {<Map />}
         </div>
       </section>
@@ -42,7 +42,7 @@ const App = () => {
 
           <li className="nav-item">
             <button
-              className="nav-link fs-1 fw-bold d-flex  align-items-center px-4 active"
+              className="nav-link fs-1 fw-bold d-flex align-items-center px-4 active"
               id="home-tab"
               data-bs-toggle="tab"
               data-bs-target="#home"

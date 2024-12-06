@@ -131,8 +131,8 @@ const QRScanner = () => {
         allowMultiple={false}
         styles={{
           container: {
-            marginTop: "5%",
-            width: "90%",
+            marginTop: "10%",
+            width: "95%",
             placeSelf: "center",
           },
           video: {
