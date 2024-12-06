@@ -17,6 +17,7 @@ import Shadow from "../assets/images/marker-shadow.png";
 
 // objeto para almacenar informacion de los lugares que se quiere marcar en el mapa
 type Lugar = {
+  id: number;
   coords: { lat: number; lng: number };
   name: string;
 };
@@ -24,14 +25,17 @@ type Lugar = {
 // De aqui se obtienen las coordenadas y el nombre de los lugares para crear los Pins en el mapa
 const lugares: Lugar[] = [
   {
+    id: 0,
     coords: { lat: 10.598246, lng: -66.930307 },
     name: "Usted está aquí",
   },
   {
+    id: 1,
     coords: { lat: 10.60062, lng: -66.922652 },
     name: "Lugar 1",
   },
   {
+    id: 2,
     coords: { lat: 10.60172, lng: -66.922543 },
     name: "Lugar 2",
   },
@@ -59,13 +63,13 @@ const Mapa = () => {
 
   useEffect(() => {
     if (map) {
-      // esta funcion corrige un error de leaflet que no centra el mapa al montar el componente y aparece todo en la esquina superior izquierda del contenedor.
+      // esta funcion corrige un error de leaflet que no centra el mapa al mostrar el componente y aparece todo en la esquina superior izquierda del contenedor.
       const i = setInterval(() => {
         map.invalidateSize(true);
       }, 500);
       return () => clearInterval(i);
     }
-  }, [map]); // Este useEffect se ejecuta solo una vez cuando el mapa está listo.
+  }, [map]);
 
   useEffect(() => {
     if (map) {
@@ -198,11 +202,6 @@ const Mapa = () => {
         <ZoomControl position="topright" />
 
         {
-          // muestra el boton de borrar ruta
-          removeRouteButton && <RemoveRouteButton />
-        }
-
-        {
           // itera el arreglo lugares y renderiza un pin para cada instancia existente
           map &&
             lugares.map((lugar, index) => (
@@ -234,6 +233,11 @@ const Mapa = () => {
         {
           // muestra el boton de trazar ruta:
           drawRouteButton && !removeRouteButton && <DrawRouteButton />
+        }
+
+        {
+          // muestra el boton de borrar ruta
+          removeRouteButton && <RemoveRouteButton />
         }
       </MapContainer>
     </div>
