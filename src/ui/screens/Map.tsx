@@ -83,6 +83,7 @@ const Mapa = () => {
           plan: L.Routing.plan(waypoints, {
             createMarker: () => false,
           }),
+          summaryTemplate: `<h2>Vía: {name}</h2><h2>Distancia: {distance}, Tiempo: {time}</h2>`,
           addWaypoints: false,
           collapsible: true,
           fitSelectedRoutes: true,
