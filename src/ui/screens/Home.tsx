@@ -31,7 +31,7 @@ const Home = () => {
       </section>
 
       {/* header con mensaje de bienvenida e icono de info para abrir el modal*/}
-      <section id="header" className="row mb-5 pb-5 justify-content-evenly">
+      <section id="header" className="row pb-5 justify-content-evenly">
         <div className="col-5 fs-1 fw-bold bg-dark-subtle p-2 rounded-4 justify-content-center align-self-center d-flex">
           Bienvenido, <br /> Usuario!
         </div>
@@ -46,8 +46,9 @@ const Home = () => {
         </div>
       </section>
 
+      <hr />
       {/* menu de botones */}
-      <section id="content" className="row pt-5 justify-content-center">
+      <section id="content" className="row py-5 justify-content-center">
         <div id="emergencias" className="row justify-content-center mb-4">
           <div className="col-2 justify-content-center d-flex">
             <i
@@ -162,6 +163,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <hr />
     </div>
   );
 };

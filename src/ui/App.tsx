@@ -23,7 +23,7 @@ const App = () => {
           id="tabButtons"
           role="tablist"
         >
-          <li className="nav-item" role="presentation">
+          <li className="nav-item">
             <button
               className="nav-link fs-1 fw-bold d-flex align-items-center px-4"
               id="scanner-tab"
@@ -40,7 +40,7 @@ const App = () => {
             </button>
           </li>
 
-          <li className="nav-item" role="presentation">
+          <li className="nav-item">
             <button
               className="nav-link fs-1 fw-bold d-flex  align-items-center px-4 active"
               id="home-tab"
@@ -57,7 +57,7 @@ const App = () => {
             </button>
           </li>
 
-          <li className="nav-item" role="presentation">
+          <li className="nav-item">
             <button
               className="nav-link fs-1 fw-bold d-flex  align-items-center px-4"
               id="map-tab"

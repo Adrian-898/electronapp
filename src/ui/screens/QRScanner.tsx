@@ -114,7 +114,7 @@ const QRScanner = () => {
 
       <section
         id="header"
-        className="row container justify-content-center pb-5 mb-5"
+        className="row container justify-content-center pb-5"
       >
         <div className="text-center fs-1 fw-bold bg-dark-subtle p-2 rounded-4">
           Escanea un código QR / Ingresa los datos

@@ -38,9 +38,6 @@ const lugares: Lugar[] = [
 ];
 
 const Mapa = () => {
-  // Coordenadas de la guaira
-  // const center = { lat: 10.597032, lng: -66.930431 };
-
   // estado del ref del mapa en el DOM, se usa para corregir un error de leaflet.
   const [map, setMap] = useState<Map | null>(null);
 
@@ -51,9 +48,10 @@ const Mapa = () => {
   // estado visual (mostrado o no segun se toque un marcador del mapa) del boton para trazar ruta del usuario a un lugar determinado
   const [drawRouteButton, setDrawRouteButton] = useState(false);
 
-  // estado de trazado de ruta del usuario a un lugar determinado (activo o no)
+  // estado que controla la activacion del trazado de ruta de A a B
   const [drawRoute, setDrawRoute] = useState(false);
 
+  // estado de configuracion de trazado de rutas, establecido o no
   const [routingControl, setRoutingControl] =
     useState<L.Routing.Control | null>(null);
 
@@ -70,25 +68,39 @@ const Mapa = () => {
   useEffect(() => {
     if (map) {
       // Clear the routing control if it exists and drawRoute is false
-      if (routingControl && !drawRoute) {
+      if (routingControl && drawRoute && destination === newDestination) {
         map.removeControl(routingControl);
         setRoutingControl(null);
       }
 
       // Add the routing control if drawRoute is true and no routing control exists
-      if (drawRoute && !routingControl) {
-        const control = L.Routing.control({
-          waypoints: [L.latLng(lugares[0].coords), L.latLng(lugares[1].coords)],
+      if (drawRoute && !routingControl && destination) {
+        let waypoints = [
+          L.latLng(lugares[0].coords),
+          L.latLng(destination.coords),
+        ];
+        let control = L.Routing.control({
+          plan: L.Routing.plan(waypoints, {
+            createMarker: () => false,
+          }),
+          addWaypoints: false,
+          collapsible: true,
           fitSelectedRoutes: true,
-          show: true,
           showAlternatives: false,
           language: "es",
+          defaultErrorHandler(error) {
+            try {
+              map.getCenter();
+            } catch {
+              console.log(error);
+              map.fitBounds(L.latLngBounds(waypoints));
+            }
+          },
         }).addTo(map);
-
         setRoutingControl(control); // Store the routing control reference
       }
     }
-  }, [map, drawRoute, routingControl]); // Add dependencies to the useEffect
+  }, [map, drawRoute]); // Add dependencies to the useEffect
 
   // icono a mostrar en la ubicación del usuario (ubicacion actual del modulo de autogestion)
   const personIcon: Icon = new L.Icon({
@@ -122,15 +134,6 @@ const Mapa = () => {
     );
   };
 
-  // al presionar el boton para trazar rutas
-  const DrawRouteButtonPress = () => {
-    setDrawRouteButton(false);
-    if (destination !== newDestination) {
-      setDestination(newDestination);
-      setDrawRoute(true);
-    }
-  };
-
   // al presionar un marcador
   const MarkerPress = (lugar: Lugar) => {
     if (destination?.name !== lugar?.name || destination.name === undefined) {
@@ -138,6 +141,15 @@ const Mapa = () => {
       setDrawRouteButton(true);
     } else {
       setDrawRouteButton(false);
+    }
+  };
+
+  // al presionar el boton para trazar rutas
+  const DrawRouteButtonPress = () => {
+    setDrawRouteButton(false);
+    if (destination !== newDestination) {
+      setDestination(newDestination);
+      setDrawRoute(true);
     }
   };
 
