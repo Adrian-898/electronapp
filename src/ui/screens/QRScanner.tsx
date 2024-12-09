@@ -12,27 +12,34 @@ const QRScanner = () => {
 
   // funcion ejecutada al leer un QR
   const handleBarCodeScan = (result: IDetectedBarcode[]) => {
-    setScanned(true);
-
-    if (result) {
-      // Aquí puedes hacer lo que desees con el resultado del QR
-      console.log(
-        "boundingBox: ",
-        result[0].boundingBox,
-        " | cornerPoints:  ",
-        result[0].cornerPoints,
-        " | format: ",
-        result[0].format,
-        " | rawValue: ",
-        result[0].rawValue
+    try {
+      if (result) {
+        // Aquí puedes hacer lo que desees con el resultado del QR
+        setScanned(true);
+        console.log(
+          "boundingBox: ",
+          result[0].boundingBox,
+          " | cornerPoints:  ",
+          result[0].cornerPoints,
+          " | format: ",
+          result[0].format,
+          " | rawValue: ",
+          result[0].rawValue
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Ha ocurrido un error al leer el QR: ",
+        getErrorMessage(error)
       );
-    } else {
-      setScanned(false);
     }
   };
 
   const handleError = (error: unknown) => {
-    console.error("Ha ocurrido un error: ", getErrorMessage(error));
+    console.error(
+      "Ha ocurrido un error intentando usar la cámara web: ",
+      getErrorMessage(error)
+    );
   };
 
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,7 +50,10 @@ const QRScanner = () => {
       try {
         console.log(url);
       } catch (error) {
-        console.error("Ha ocurrido un error: ", getErrorMessage(error));
+        console.error(
+          "Ha ocurrido un error al cargar los datos: ",
+          getErrorMessage(error)
+        );
       }
     }
   };
