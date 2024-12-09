@@ -71,38 +71,37 @@ const Mapa = () => {
     }
   }, [map]);
 
+  // Calcula la ruta en el mapa y la dibuja al usuario (usando Leaflet Routing Machine).
   useEffect(() => {
-    if (map) {
-      // Agrega la ruta al mapa
-      if (drawRoute && destination && !routing) {
-        let waypoints = [
-          L.latLng(lugares[0].coords),
-          L.latLng(destination.coords),
-        ];
-        let routing = L.Routing.control({
-          plan: L.Routing.plan(waypoints, {
-            createMarker: () => false,
-          }),
-          summaryTemplate: `<h2>Vía: {name}</h2><h2>Distancia: {distance}, Tiempo: {time}</h2>`,
-          addWaypoints: false,
-          collapsible: true,
-          fitSelectedRoutes: true,
-          showAlternatives: false,
-          language: "es",
-          defaultErrorHandler(error) {
-            try {
-              map.getCenter();
-            } catch {
-              console.log(error);
-              map.fitBounds(L.latLngBounds(waypoints));
-            }
-          },
-        }).addTo(map);
-        setRouting(routing);
-        setRemoveRouteButton(true);
-      }
+    if (!map || !drawRoute || !destination) return;
+    if (!routing) {
+      let waypoints = [
+        L.latLng(lugares[0].coords),
+        L.latLng(destination.coords),
+      ];
+      let routing = L.Routing.control({
+        plan: L.Routing.plan(waypoints, {
+          createMarker: () => false,
+        }),
+        summaryTemplate: `<h2>Vía: {name}</h2><h2>Distancia: {distance}, Tiempo: {time}</h2>`,
+        addWaypoints: false,
+        collapsible: true,
+        fitSelectedRoutes: true,
+        showAlternatives: false,
+        language: "es",
+        defaultErrorHandler(error) {
+          try {
+            map.getCenter();
+          } catch {
+            console.log(error);
+            map.fitBounds(L.latLngBounds(waypoints));
+          }
+        },
+      }).addTo(map);
+      setRouting(routing);
+      setRemoveRouteButton(true);
     }
-  }, [map, drawRoute]); // Add dependencies to the useEffect
+  }, [drawRoute]);
 
   // icono a mostrar en la ubicación del usuario (ubicacion actual del modulo de autogestion)
   const personIcon: Icon = new L.Icon({
