@@ -75,20 +75,24 @@ const Mapa = () => {
   useEffect(() => {
     if (!map || !drawRoute || !destination) return;
     if (!routing) {
+      // Origen y destino para trazar la ruta:
       let waypoints = [
         L.latLng(lugares[0].coords),
         L.latLng(destination.coords),
       ];
+      // Configuracion de la ruta a trazar y demas elementos.
       let routing = L.Routing.control({
         plan: L.Routing.plan(waypoints, {
           createMarker: () => false,
         }),
-        summaryTemplate: `<h2>Vía: {name}</h2><h2>Distancia: {distance}, Tiempo: {time}</h2>`,
+        summaryTemplate:
+          "<h2>Vía: {name}</h2><h2>Distancia: {distance}, Tiempo: {time}</h2>",
         addWaypoints: false,
         collapsible: true,
         fitSelectedRoutes: true,
         showAlternatives: false,
         language: "es",
+        // Manejo de errores
         defaultErrorHandler(error) {
           try {
             map.getCenter();
@@ -98,6 +102,7 @@ const Mapa = () => {
           }
         },
       }).addTo(map);
+
       setRouting(routing);
       setRemoveRouteButton(true);
     }
@@ -198,7 +203,6 @@ const Mapa = () => {
         />
 
         <AttributionControl position="bottomleft" />
-
         <ZoomControl position="topright" />
 
         {
