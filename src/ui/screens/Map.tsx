@@ -46,8 +46,8 @@ const Mapa = () => {
   const [map, setMap] = useState<Map | null>(null);
 
   // destino establecido al que ir, una vez se selecciona un marcador
-  const [destination, setDestination] = useState<Lugar | null>();
-  const [newDestination, setNewDestination] = useState<Lugar | null>();
+  const [destination, setDestination] = useState<Lugar | null>(null);
+  const [newDestination, setNewDestination] = useState<Lugar | null>(null);
 
   // estado visual (mostrado o no segun se toque un marcador del mapa) del boton para trazar ruta del usuario a un lugar determinado
   const [drawRouteButton, setDrawRouteButton] = useState(false);
@@ -129,7 +129,7 @@ const Mapa = () => {
 
   // al presionar un marcador
   const MarkerPress = (lugar: Lugar) => {
-    if (destination?.name !== lugar?.name || destination?.name === undefined) {
+    if (!destination || destination !== lugar) {
       setNewDestination(lugar);
       setDrawRouteButton(true);
     } else {
