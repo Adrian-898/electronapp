@@ -1,21 +1,31 @@
 import { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
+import type { IDetectedBarcode } from "@yudiel/react-qr-scanner";
 import getErrorMessage from "../../utils/getErrorMessage";
 
 const QRScanner = () => {
   // estado de escaneo de QR, se usa para mostrar el botón de escaneo de nuevo
-  const [scanned, setScanned] = useState<boolean>(false);
+  const [scanned, setScanned] = useState<boolean>(true);
   // datos del form
   const [parquimetro, setParquimetro] = useState<string>("");
   const [puesto, setPuesto] = useState<string | number>("");
 
   // funcion ejecutada al leer un QR
-  const handleBarCodeScan = (result: string) => {
+  const handleBarCodeScan = (result: IDetectedBarcode[]) => {
     setScanned(true);
 
     if (result) {
       // Aquí puedes hacer lo que desees con el resultado del QR
-      console.log(result);
+      console.log(
+        "boundingBox: ",
+        result[0].boundingBox,
+        " | cornerPoints:  ",
+        result[0].cornerPoints,
+        " | format: ",
+        result[0].format,
+        " | rawValue: ",
+        result[0].rawValue
+      );
     } else {
       setScanned(false);
     }
@@ -112,10 +122,7 @@ const QRScanner = () => {
         </div>
       </section>
 
-      <section
-        id="header"
-        className="row container justify-content-center pb-5"
-      >
+      <section id="header" className="row container justify-content-center">
         <div className="text-center fs-1 fw-bold bg-dark-subtle p-2 rounded-4">
           Escanea un código QR / Ingresa los datos
         </div>
@@ -123,25 +130,21 @@ const QRScanner = () => {
 
       {/* Componente que muestra la camara en pantalla y permite el escaneo */}
       <Scanner
-        onScan={() => handleBarCodeScan}
-        onError={() => handleError}
+        onScan={(result) => handleBarCodeScan(result)}
+        onError={(error) => handleError(error)}
         formats={["qr_code"]}
         paused={scanned}
-        components={{ audio: false }}
+        components={{ audio: false, finder: false, zoom: false }}
         allowMultiple={false}
         styles={{
           container: {
-            marginTop: "10%",
-            width: "95%",
-            placeSelf: "center",
-          },
-          video: {
             zIndex: -1,
-            overflow: "visible",
-            position: "fixed",
+            top: 0,
+            left: 0,
+            position: "absolute",
             width: "100%",
-            height: "100%",
           },
+          video: { bottom: 142.333 },
         }}
       />
 

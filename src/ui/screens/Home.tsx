@@ -49,7 +49,7 @@ const Home = () => {
       <hr />
       {/* menu de botones */}
       <section id="content" className="row py-5 justify-content-center">
-        <div id="emergencias" className="row justify-content-center mb-4">
+        <div id="emergencias" className="row justify-content-center mb-5">
           <div className="col-2 justify-content-center d-flex">
             <i
               className="bi bi-hospital bg-dark-subtle p-3 rounded-4 d-flex"
@@ -61,14 +61,13 @@ const Home = () => {
               id="b1"
               className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
               href="#"
-              role="button"
             >
               Emergencias
             </a>
           </div>
         </div>
 
-        <div id="parquimetro" className="row justify-content-center mb-4">
+        <div id="parquimetro" className="row justify-content-center mb-5">
           <div className="col-2 justify-content-center d-flex">
             <i
               className="bi bi-car-front bg-dark-subtle p-3 rounded-4 d-flex"
@@ -80,14 +79,13 @@ const Home = () => {
               id="b2"
               className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
               href="#"
-              role="button"
             >
               Parquímetro
             </a>
           </div>
         </div>
 
-        <div id="servicios" className="row justify-content-center mb-4">
+        <div id="servicios" className="row justify-content-center mb-5">
           <div className="col-2 justify-content-center d-flex">
             <i
               className="bi bi-lightbulb bg-dark-subtle p-3 rounded-4 d-flex"
@@ -99,14 +97,13 @@ const Home = () => {
               id="b3"
               className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
               href="#"
-              role="button"
             >
               Servicios
             </a>
           </div>
         </div>
 
-        <div id="comercio" className="row justify-content-center mb-4">
+        <div id="comercio" className="row justify-content-center mb-5">
           <div className="col-2 justify-content-center d-flex">
             <i
               className="bi bi-shop bg-dark-subtle p-3 rounded-4 d-flex"
@@ -118,14 +115,13 @@ const Home = () => {
               id="b4"
               className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
               href="#"
-              role="button"
             >
               Comercio
             </a>
           </div>
         </div>
 
-        <div id="denuncias" className="row justify-content-center mb-4">
+        <div id="denuncias" className="row justify-content-center mb-5">
           <div className="col-2 justify-content-center d-flex">
             <i
               className="bi bi-person-exclamation bg-dark-subtle p-3 rounded-4 d-flex"
@@ -137,14 +133,13 @@ const Home = () => {
               id="b5"
               className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
               href="#"
-              role="button"
             >
               Denuncias
             </a>
           </div>
         </div>
 
-        <div id="multas" className="row justify-content-center mb-4">
+        <div id="multas" className="row justify-content-center">
           <div className="col-2 justify-content-center d-flex">
             <i
               className="bi bi-sign-no-parking bg-dark-subtle p-3 rounded-4 d-flex"
@@ -156,7 +151,6 @@ const Home = () => {
               id="b6"
               className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
               href="#"
-              role="button"
             >
               Multas
             </a>
