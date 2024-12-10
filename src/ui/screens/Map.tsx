@@ -7,10 +7,9 @@ import {
   ZoomControl,
   AttributionControl,
 } from "react-leaflet";
-import L from "leaflet";
+import L, { type Map, type Icon } from "leaflet";
 import "leaflet-routing-machine";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
-import type { Map, Icon } from "leaflet";
 import PersonIcon from "../assets/images/person-standing.svg";
 import MarkerIcon from "../assets/images/marker-icon-2x.png";
 import Shadow from "../assets/images/marker-shadow.png";
@@ -206,7 +205,7 @@ const Mapa = () => {
         <ZoomControl position="topright" />
 
         {
-          // itera el arreglo lugares y renderiza un pin para cada instancia existente
+          // itera el arreglo lugares y renderiza un marcador para cada instancia existente
           map &&
             lugares.map((lugar, index) => (
               <Marker
@@ -214,7 +213,7 @@ const Mapa = () => {
                 position={lugar.coords}
                 icon={
                   // se renderiza un icono diferente para la posicion actual
-                  lugar.name === "Usted está aquí" ? personIcon : markerIcon
+                  lugar.id === 0 ? personIcon : markerIcon
                 }
                 eventHandlers={{
                   click: () => {

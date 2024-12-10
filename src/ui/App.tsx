@@ -21,7 +21,6 @@ const App = () => {
         <ol
           className="nav nav-tabs nav-underline justify-content-evenly bg-light border-2 border-top border-dark-subtle"
           id="tabButtons"
-          role="tablist"
         >
           <li className="nav-item">
             <button
@@ -30,7 +29,6 @@ const App = () => {
               data-bs-toggle="tab"
               data-bs-target="#scanner"
               type="button"
-              role="tab"
             >
               <i
                 className="bi bi-camera"
@@ -47,7 +45,6 @@ const App = () => {
               data-bs-toggle="tab"
               data-bs-target="#home"
               type="button"
-              role="tab"
             >
               <i
                 className="bi bi-house-door"
@@ -64,7 +61,6 @@ const App = () => {
               data-bs-toggle="tab"
               data-bs-target="#map"
               type="button"
-              role="tab"
             >
               <i
                 className="bi bi-geo-alt"

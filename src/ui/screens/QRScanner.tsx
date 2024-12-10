@@ -5,7 +5,8 @@ import getErrorMessage from "../../utils/getErrorMessage";
 
 const QRScanner = () => {
   // estado de escaneo de QR, se usa para mostrar el botón de escaneo de nuevo
-  const [scanned, setScanned] = useState<boolean>(true);
+  const [scanned, setScanned] = useState<boolean>(false);
+
   // datos del form
   const [parquimetro, setParquimetro] = useState<string>("");
   const [puesto, setPuesto] = useState<string | number>("");
@@ -52,7 +53,7 @@ const QRScanner = () => {
   return (
     <div id="QRScanner" className="container p-5" style={{ bottom: 142.333 }}>
       {/* Modal */}
-      <section id="inputModal" className="modal fade" role="dialog">
+      <section id="inputModal" className="modal fade">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <section className="modal-header">
