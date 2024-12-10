@@ -42,7 +42,7 @@ const lugares: Lugar[] = [
 ];
 
 const Mapa = () => {
-  // estado del ref del mapa en el DOM, se usa para corregir un error de leaflet.
+  // estado de la instancia del mapa, se usa para corregir un error de leaflet.
   const [map, setMap] = useState<Map | null>(null);
 
   // destino establecido al que ir, una vez se selecciona un marcador
@@ -220,9 +220,7 @@ const Mapa = () => {
                   click: () => {
                     console.log("marcador clickeado");
                     // se registra el click solo cuando es en un marcador distinto a la posicion actual.
-                    lugar.name !== "Usted está aquí"
-                      ? MarkerPress(lugar)
-                      : null;
+                    lugar.id !== 0 ? MarkerPress(lugar) : null;
                     // centra el mapa al marcador selecionado
                     map.flyTo(lugar.coords);
                   },
