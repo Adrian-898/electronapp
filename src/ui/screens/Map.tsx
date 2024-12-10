@@ -14,6 +14,7 @@ import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import PersonIcon from "../assets/images/person-standing.svg";
 import MarkerIcon from "../assets/images/marker-icon-2x.png";
 import Shadow from "../assets/images/marker-shadow.png";
+import getErrorMessage from "../../utils/getErrorMessage";
 
 // objeto para almacenar informacion de los lugares que se quiere marcar en el mapa
 type Lugar = {
@@ -97,14 +98,19 @@ const Mapa = () => {
           try {
             map.getCenter();
           } catch {
-            console.log(error);
+            console.error(
+              "Ha ocurrido un error al calcular la ruta: ",
+              getErrorMessage(error)
+            );
             map.fitBounds(L.latLngBounds(waypoints));
           }
         },
       }).addTo(map);
 
-      setRouting(routing);
-      setRemoveRouteButton(true);
+      if (routing) {
+        setRouting(routing);
+        setRemoveRouteButton(true);
+      }
     }
   }, [drawRoute]);
 

@@ -27,6 +27,7 @@ const QRScanner = () => {
     }
   };
 
+  // manejo de errores con la camara web
   const handleError = (error: unknown) => {
     console.error(
       "Ha ocurrido un error intentando usar la cámara web: ",
@@ -34,6 +35,7 @@ const QRScanner = () => {
     );
   };
 
+  // manejo de los datos del form (ingreso manual de datos)
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (parquimetro !== "" && puesto !== "") {
@@ -124,6 +126,7 @@ const QRScanner = () => {
         </div>
       </section>
 
+      {/*header con mensaje de titulo*/}
       <section id="header" className="row container justify-content-center">
         <div className="text-center fs-1 fw-bold bg-dark-subtle p-2 rounded-4">
           Escanea un código QR / Ingresa los datos
@@ -152,6 +155,7 @@ const QRScanner = () => {
         }}
       />
 
+      {/* footer mostrando el boton de escaneo y el boton de ingresar datos manualmente */}
       <section
         id="footer"
         className="row fixed-bottom"
@@ -159,7 +163,7 @@ const QRScanner = () => {
       >
         <div className="d-flex justify-content-evenly mb-5">
           {
-            // Al escanear un código, se pausa el escaneo hasta presionar el boton
+            // Al escanear un código, se pausa la imagen y el escaneo se desactiva hasta presionar el boton.
             scanned && (
               <button
                 type="button"
@@ -171,7 +175,7 @@ const QRScanner = () => {
             )
           }
 
-          {/* icono que abre el modal */}
+          {/* icono que abre el modal para ingresar datos*/}
           <i
             className="bi bi-input-cursor-text p-3 bg-dark-subtle rounded-4 border border-2 border-dark d-flex"
             style={{ fontSize: 80 }}
