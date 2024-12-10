@@ -16,16 +16,7 @@ const QRScanner = () => {
       if (result) {
         // Aquí puedes hacer lo que desees con el resultado del QR
         setScanned(true);
-        console.log(
-          "boundingBox: ",
-          result[0].boundingBox,
-          " | cornerPoints:  ",
-          result[0].cornerPoints,
-          " | format: ",
-          result[0].format,
-          " | rawValue: ",
-          result[0].rawValue
-        );
+        console.log(result[0].rawValue);
       }
     } catch (error) {
       console.error(
@@ -149,12 +140,14 @@ const QRScanner = () => {
         styles={{
           container: {
             zIndex: -1,
-            top: 0,
             left: 0,
+            bottom: 142.333,
             position: "absolute",
             width: "100%",
           },
-          video: { bottom: 142.333 },
+          video: {
+            width: "100%",
+          },
         }}
       />
 
