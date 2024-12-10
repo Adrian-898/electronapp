@@ -34,7 +34,7 @@ const App = () => {
                 className="bi bi-camera"
                 style={{ fontSize: 80, paddingRight: 10 }}
               ></i>
-              QR
+              Escáner QR
             </button>
           </li>
 
