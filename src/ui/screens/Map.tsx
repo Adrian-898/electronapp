@@ -7,6 +7,7 @@ import {
   ZoomControl,
   AttributionControl,
 } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import L, { type Map, type Icon } from "leaflet";
 import "leaflet-routing-machine";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
