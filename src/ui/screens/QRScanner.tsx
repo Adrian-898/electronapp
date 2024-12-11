@@ -5,7 +5,7 @@ import getErrorMessage from "../../utils/getErrorMessage";
 
 const QRScanner = () => {
   // estado de escaneo de QR, se usa para mostrar el botón de escaneo de nuevo
-  const [scanned, setScanned] = useState<boolean>(false);
+  const [scanned, setScanned] = useState<boolean>(true);
 
   // datos del form
   const [parquimetro, setParquimetro] = useState<string>("");
