@@ -170,7 +170,7 @@ const QRScanner = () => {
                 className="btn btn-primary fs-1 fw-bold align-self-center p-3 rounded-4 border-2 border-dark d-flex"
                 onClick={() => setScanned(false)}
               >
-                Escanear nuevamente
+                Escanear un nuevo código QR
               </button>
             )
           }
