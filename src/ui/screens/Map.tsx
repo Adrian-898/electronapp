@@ -97,17 +97,22 @@ const Mapa = () => {
         collapsible: true,
         fitSelectedRoutes: true,
         language: "es",
-        // Manejo de errores
-        defaultErrorHandler(error) {
-          try {
-            map.getCenter();
-          } catch {
-            console.error(
-              "Ha ocurrido un error al calcular la ruta: ",
-              getErrorMessage(error)
-            );
-            map.fitBounds(L.latLngBounds(waypoints));
-          }
+        defaultErrorHandler: () => false,
+      }).addTo(map);
+
+      // Manejo de errores
+      L.Routing.errorControl(routing, {
+        header:
+          "Ha ocurrido un error al calcular la ruta, por favor, intente de nuevo...",
+        formatMessage: (error) => {
+          console.error(
+            "Ha ocurrido un error al intentar calcular una ruta.\nStatus: ",
+            error.status,
+            "\nMensaje: ",
+            error.message
+          );
+
+          return error.message;
         },
       }).addTo(map);
 
