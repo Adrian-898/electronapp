@@ -109,14 +109,14 @@ const QRScanner = () => {
             <section className="modal-footer justify-content-evenly">
               <button
                 type="button"
-                className="btn btn-secondary fs-1 fw-bold"
+                className="btn btn-secondary bg-gradient border-2 fs-1 fw-bold"
                 data-bs-dismiss="modal"
               >
                 Cerrar
               </button>
               <button
                 type="submit"
-                className="btn btn-primary fs-1 fw-bold"
+                className="btn btn-primary bg-gradient border-2 fs-1 fw-bold"
                 form="parquimetroForm"
               >
                 Buscar
@@ -167,7 +167,7 @@ const QRScanner = () => {
             scanned && (
               <button
                 type="button"
-                className="btn btn-primary fs-1 fw-bold align-self-center p-3 rounded-4 border-2 border-dark d-flex"
+                className="btn btn-primary bg-gradient fs-1 fw-bold align-self-center p-3 rounded-4 border-2 border-dark d-flex"
                 onClick={() => setScanned(false)}
               >
                 Escanear un nuevo código QR

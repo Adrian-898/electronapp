@@ -20,7 +20,7 @@ const Home = () => {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary fs-1 fw-bold"
+                className="btn btn-secondary bg-gradient border-2 fs-1 fw-bold"
                 data-bs-dismiss="modal"
               >
                 Cerrar
@@ -59,7 +59,7 @@ const Home = () => {
           <div className="col-4 align-self-center">
             <a
               id="b1"
-              className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
+              className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
               href="#"
             >
               Emergencias
@@ -77,7 +77,7 @@ const Home = () => {
           <div className="col-4 align-self-center">
             <a
               id="b2"
-              className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
+              className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
               href="#"
             >
               Parquímetro
@@ -95,7 +95,7 @@ const Home = () => {
           <div className="col-4 align-self-center">
             <a
               id="b3"
-              className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
+              className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
               href="#"
             >
               Servicios
@@ -113,7 +113,7 @@ const Home = () => {
           <div className="col-4 align-self-center">
             <a
               id="b4"
-              className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
+              className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
               href="#"
             >
               Comercio
@@ -131,7 +131,7 @@ const Home = () => {
           <div className="col-4 align-self-center">
             <a
               id="b5"
-              className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
+              className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
               href="#"
             >
               Denuncias
@@ -149,7 +149,7 @@ const Home = () => {
           <div className="col-4 align-self-center">
             <a
               id="b6"
-              className="btn btn-lg btn-primary border-2 border-dark fs-1 fw-bold"
+              className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
               href="#"
             >
               Multas

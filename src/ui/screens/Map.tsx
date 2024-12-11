@@ -4,7 +4,6 @@ import {
   TileLayer,
   Marker,
   Popup,
-  ZoomControl,
   AttributionControl,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -81,17 +80,22 @@ const Mapa = () => {
         L.latLng(lugares[0].coords),
         L.latLng(destination.coords),
       ];
+
       // Configuracion de la ruta a trazar y demas elementos.
       let routing = L.Routing.control({
         plan: L.Routing.plan(waypoints, {
           createMarker: () => false,
         }),
-        summaryTemplate:
-          "<h2>Vía: {name}</h2><h2>Distancia: {distance}, Tiempo: {time}</h2>",
+        containerClassName:
+          "card m-3 p-1 bg-secondary-subtle bg-gradient rounded-3 border-2 border-secondary shadow",
+        itineraryClassName: "list-group",
+        alternativeClassName: "list-group-item list-group-item-action",
+        collapseBtnClass:
+          "btn btn-link p-2 bg-secondary bg-gradient rounded-1 align-self-center w-100 h-100 ",
+        summaryTemplate: `<h5>Vía: <strong>{name}</strong></h5><h2>Distancia: <strong>{distance}</strong>, Tiempo: <strong>{time}</strong></h2>`,
         addWaypoints: false,
         collapsible: true,
         fitSelectedRoutes: true,
-        showAlternatives: false,
         language: "es",
         // Manejo de errores
         defaultErrorHandler(error) {
@@ -148,7 +152,7 @@ const Mapa = () => {
     return (
       <button
         type="button"
-        className="btn btn-primary btn-lg fs-2 position-absolute fixed-bottom m-5"
+        className="btn btn-primary bg-gradient btn-lg border-2 fs-2 position-absolute fixed-bottom m-5"
         onClick={DrawRouteButtonPress}
       >
         Mostrar el camino a {newDestination?.name}
@@ -170,7 +174,7 @@ const Mapa = () => {
     return (
       <button
         type="button"
-        className="btn btn-secondary btn-lg fs-2 position-absolute fixed-bottom m-5"
+        className="btn btn-secondary bg-gradient btn-lg border-2 fs-2 position-absolute fixed-bottom m-5"
         onClick={RemoveRouteButtonPress}
       >
         Calcular nueva ruta (elimina la existente)
@@ -200,7 +204,6 @@ const Mapa = () => {
         scrollWheelZoom={false}
         touchZoom
         bounceAtZoomLimits
-        zoomControl={false}
         attributionControl={false}
       >
         <TileLayer
@@ -209,7 +212,6 @@ const Mapa = () => {
         />
 
         <AttributionControl position="bottomleft" />
-        <ZoomControl position="topright" />
 
         {
           // itera el arreglo lugares y renderiza un marcador para cada instancia existente
