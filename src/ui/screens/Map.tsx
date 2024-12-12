@@ -13,7 +13,6 @@ import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import PersonIcon from "../assets/images/person-standing.svg";
 import MarkerIcon from "../assets/images/marker-icon-2x.png";
 import Shadow from "../assets/images/marker-shadow.png";
-import getErrorMessage from "../../utils/getErrorMessage";
 
 // objeto para almacenar informacion de los lugares que se quiere marcar en el mapa
 type Lugar = {
@@ -58,8 +57,12 @@ const Mapa = () => {
   // estado que controla la activacion del trazado de ruta de A a B
   const [drawRoute, setDrawRoute] = useState(false);
 
-  // estado de existencia de la ruta trazada y su configuracion
+  // estado de existencia de la ruta trazada y su configuración en el mapa
   const [routing, setRouting] = useState<L.Routing.Control | null>(null);
+
+  // estado del manejo de errores de rutas trazadas en el mapa
+  const [routingErrorHandler, setRoutingErrorHandler] =
+    useState<L.Routing.ErrorControl | null>(null);
 
   useEffect(() => {
     if (map) {
@@ -91,8 +94,9 @@ const Mapa = () => {
         itineraryClassName: "list-group",
         alternativeClassName: "list-group-item list-group-item-action",
         collapseBtnClass:
-          "btn btn-link p-2 bg-secondary bg-gradient rounded-1 align-self-center w-100 h-100 ",
+          "btn btn-link p-2 bg-secondary bg-gradient rounded-1 w-100 h-100",
         summaryTemplate: `<h5>Vía: <strong>{name}</strong></h5><h2>Distancia: <strong>{distance}</strong>, Tiempo: <strong>{time}</strong></h2>`,
+        showAlternatives: false,
         addWaypoints: false,
         collapsible: true,
         fitSelectedRoutes: true,
@@ -101,7 +105,7 @@ const Mapa = () => {
       }).addTo(map);
 
       // Manejo de errores
-      L.Routing.errorControl(routing, {
+      let errorHandler = L.Routing.errorControl(routing, {
         header:
           "Ha ocurrido un error al calcular la ruta, por favor, intente de nuevo...",
         formatMessage: (error) => {
@@ -118,6 +122,7 @@ const Mapa = () => {
 
       if (routing) {
         setRouting(routing);
+        setRoutingErrorHandler(errorHandler);
         setRemoveRouteButton(true);
       }
     }
@@ -191,8 +196,10 @@ const Mapa = () => {
   const RemoveRouteButtonPress = () => {
     if (map && routing && removeRouteButton) {
       setRemoveRouteButton(false);
-      map.removeControl(routing);
+      routing.remove();
+      routingErrorHandler?.remove();
       setRouting(null);
+      setRoutingErrorHandler(null);
       setDestination(null);
       setDrawRoute(false);
     }
