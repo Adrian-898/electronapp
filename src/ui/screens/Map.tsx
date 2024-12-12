@@ -90,12 +90,12 @@ const Mapa = () => {
           createMarker: () => false,
         }),
         containerClassName:
-          "card m-3 p-1 bg-secondary-subtle bg-gradient rounded-3 border-2 border-secondary shadow",
+          "card m-3 p-1 w-100 bg-secondary-subtle bg-gradient align-items-center rounded-3 border-2 border-secondary shadow",
         itineraryClassName: "list-group",
         alternativeClassName: "list-group-item list-group-item-action",
         collapseBtnClass:
           "btn btn-link p-2 bg-secondary bg-gradient rounded-1 w-100 h-100",
-        summaryTemplate: `<h5>Vía: <strong>{name}</strong></h5><h2>Distancia: <strong>{distance}</strong>, Tiempo: <strong>{time}</strong></h2>`,
+        summaryTemplate: `<h5>Vía: <strong>{name}</strong></h5><h2>Distancia: <strong>{distance}</strong>, Tiempo: <strong>{time}</strong><hr><strong>Indicaciones:</strong></h2>`,
         showAlternatives: false,
         addWaypoints: false,
         collapsible: true,
