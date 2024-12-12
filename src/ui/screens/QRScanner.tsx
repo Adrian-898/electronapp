@@ -53,7 +53,7 @@ const QRScanner = () => {
   };
 
   return (
-    <div id="QRScanner" className="container p-5" style={{ bottom: 142.333 }}>
+    <div id="QRScanner" className="container p-5" style={{ bottom: 141.6 }}>
       {/* Modal */}
       <section id="inputModal" className="modal fade">
         <div className="modal-dialog modal-dialog-centered">
@@ -145,7 +145,7 @@ const QRScanner = () => {
           container: {
             zIndex: -1,
             left: 0,
-            bottom: 142.333,
+            bottom: 141.6,
             position: "absolute",
             width: "100%",
           },
@@ -159,7 +159,7 @@ const QRScanner = () => {
       <section
         id="footer"
         className="row fixed-bottom"
-        style={{ bottom: 142.333 }}
+        style={{ bottom: 141.6 }}
       >
         <div className="d-flex justify-content-evenly mb-5">
           {

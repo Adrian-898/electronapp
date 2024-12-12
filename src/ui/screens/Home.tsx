@@ -1,6 +1,6 @@
 const Home = () => {
   return (
-    <div id="home" className="container p-5" style={{ marginBottom: 142.333 }}>
+    <div id="home" className="container p-5" style={{ marginBottom: 141.6 }}>
       {/* Modal */}
       <section id="modal" className="modal fade">
         <div className="modal-dialog modal-dialog-centered modal-lg">

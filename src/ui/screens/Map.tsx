@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -79,7 +79,7 @@ const Mapa = () => {
   useEffect(() => {
     if (!map || !drawRoute || !destination) return;
     if (!routing) {
-      // Origen y destino para trazar la ruta:
+      // Origen y destino para trazar la ruta (se puede agregar mas de 2):
       let waypoints = [
         L.latLng(lugares[0].coords),
         L.latLng(destination.coords),
@@ -88,12 +88,12 @@ const Mapa = () => {
       // Configuracion de la ruta a trazar y demas elementos.
       let routing = L.Routing.control({
         plan: L.Routing.plan(waypoints, {
+          // se evita crear el marcador por defecto que leaflet asigna a cada waypoint
           createMarker: () => false,
         }),
+        // configuracion de la ventana con el itinerario de viaje:
         containerClassName:
           "card m-3 p-1 w-100 bg-secondary-subtle bg-gradient align-items-center rounded-3 border-2 border-secondary shadow",
-        itineraryClassName: "list-group",
-        alternativeClassName: "list-group-item list-group-item-action",
         collapseBtnClass:
           "btn btn-link p-2 bg-secondary bg-gradient rounded-1 w-100 h-100",
         summaryTemplate: `<h5>Vía: <strong>{name}</strong></h5><h2>Distancia: <strong>{distance}</strong>, Tiempo: <strong>{time}</strong><hr><strong>Indicaciones:</strong></h2>`,
@@ -116,7 +116,6 @@ const Mapa = () => {
             "\nMensaje: ",
             error.message
           );
-
           return error.message;
         },
       }).addTo(map);
@@ -146,6 +145,34 @@ const Mapa = () => {
     iconAnchor: [12, 41],
     shadowUrl: Shadow,
     popupAnchor: [1, -38],
+  });
+
+  // Componente que renderiza un Marcador en el mapa
+  const MarkerComponent = memo((props: { lugar: Lugar }) => {
+    return (
+      map && (
+        <Marker
+          key={props.lugar.id}
+          position={props.lugar.coords}
+          icon={
+            // se renderiza un icono diferente para la posicion actual
+            props.lugar.id !== 0 ? markerIcon : personIcon
+          }
+          eventHandlers={{
+            click: () => {
+              console.log("marcador clickeado");
+              // se registra el click solo cuando es en un marcador distinto a la posicion actual.
+              // ! ESTA CAUSANDO UN ERROR CON EL POPUP !
+              props.lugar.id !== 0 ? MarkerPress(props.lugar) : null;
+              // centra el mapa al marcador selecionado
+              map.flyTo(props.lugar.coords);
+            },
+          }}
+        >
+          <Popup>{props.lugar.name}</Popup>
+        </Marker>
+      )
+    );
   });
 
   // al presionar un marcador
@@ -236,26 +263,7 @@ const Mapa = () => {
           // itera el arreglo lugares y renderiza un marcador para cada instancia existente
           map &&
             lugares.map((lugar, index) => (
-              <Marker
-                key={index}
-                position={lugar.coords}
-                icon={
-                  // se renderiza un icono diferente para la posicion actual
-                  lugar.id === 0 ? personIcon : markerIcon
-                }
-                eventHandlers={{
-                  click: () => {
-                    console.log("marcador clickeado");
-                    // se registra el click solo cuando es en un marcador distinto a la posicion actual.
-                    lugar.id !== 0 ? MarkerPress(lugar) : null;
-                    // centra el mapa al marcador selecionado
-                    map.flyTo(lugar.coords);
-                  },
-                }}
-              >
-                {/* Muestra el nombre del lugar seleccionado */}
-                <Popup>{lugar.name}</Popup>
-              </Marker>
+              <MarkerComponent lugar={lugar} key={index} />
             ))
         }
 
