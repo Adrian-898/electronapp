@@ -4,6 +4,7 @@ import {
   TileLayer,
   Marker,
   Popup,
+  ZoomControl,
   AttributionControl,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -162,7 +163,7 @@ const Mapa = () => {
     return (
       <button
         type="button"
-        className="btn btn-primary bg-gradient btn-lg border-2 fs-2 position-absolute fixed-bottom m-5"
+        className="btn btn-primary btn-lg m-5 bg-gradient border-2 fs-2 position-absolute fixed-bottom shadow"
         onClick={DrawRouteButtonPress}
       >
         Mostrar el camino a {newDestination?.name}
@@ -184,7 +185,7 @@ const Mapa = () => {
     return (
       <button
         type="button"
-        className="btn btn-secondary bg-gradient btn-lg border-2 fs-2 position-absolute fixed-bottom m-5"
+        className="btn btn-secondary btn-lg m-5 bg-gradient border-2 fs-2 position-absolute fixed-bottom shadow"
         onClick={RemoveRouteButtonPress}
       >
         Calcular nueva ruta (elimina la existente)
@@ -206,7 +207,7 @@ const Mapa = () => {
   };
 
   return (
-    <div id="map" className="fixed-top" style={{ bottom: 142.333 }}>
+    <div id="map" className="fixed-top" style={{ bottom: 141.6 }}>
       <MapContainer
         id="mapa-la-guaira"
         className="h-100"
@@ -216,11 +217,17 @@ const Mapa = () => {
         scrollWheelZoom={false}
         touchZoom
         bounceAtZoomLimits
+        zoomControl={false}
         attributionControl={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+
+        <ZoomControl
+          zoomInText={`<div class="bg-secondary-subtle bg-gradient fs-4">+</div>`}
+          zoomOutText={`<div class="bg-secondary-subtle bg-gradient fs-4">-</div>`}
         />
 
         <AttributionControl position="bottomleft" />

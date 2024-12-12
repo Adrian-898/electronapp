@@ -1,6 +1,7 @@
 import Home from "./screens/Home";
 import Map from "./screens/Map";
 import QRScanner from "./screens/QRScanner";
+import "./app.css";
 
 const App = () => {
   return (
@@ -30,10 +31,7 @@ const App = () => {
               data-bs-target="#scanner"
               type="button"
             >
-              <i
-                className="bi bi-camera"
-                style={{ fontSize: 80, paddingRight: 10 }}
-              ></i>
+              <i className="bi bi-camera tab-bar-icon"></i>
               Escáner QR
             </button>
           </li>
@@ -46,10 +44,7 @@ const App = () => {
               data-bs-target="#home"
               type="button"
             >
-              <i
-                className="bi bi-house-door"
-                style={{ fontSize: 80, paddingRight: 10 }}
-              ></i>
+              <i className="bi bi-house-door tab-bar-icon"></i>
               Inicio
             </button>
           </li>
@@ -62,10 +57,7 @@ const App = () => {
               data-bs-target="#map"
               type="button"
             >
-              <i
-                className="bi bi-geo-alt"
-                style={{ fontSize: 80, paddingRight: 10 }}
-              ></i>
+              <i className="bi bi-geo-alt tab-bar-icon"></i>
               Ubicación
             </button>
           </li>
