@@ -1,6 +1,8 @@
+import "./styles.css";
+
 const Home = () => {
   return (
-    <div id="home" className="container p-5" style={{ marginBottom: 141.6 }}>
+    <div id="home" className="container p-5">
       {/* Modal */}
       <section id="modal" className="modal fade">
         <div className="modal-dialog modal-dialog-centered modal-lg">
@@ -38,8 +40,7 @@ const Home = () => {
 
         <div className="col-2 justify-content-center d-flex">
           <i
-            className="bi bi-info-circle bg-dark-subtle p-2 rounded-4 border border-2 border-dark align-self-center d-flex"
-            style={{ fontSize: 80 }}
+            className="bi bi-info-circle bg-dark-subtle p-2 rounded-4 border border-2 border-dark align-self-center d-flex icon-size"
             data-bs-toggle="modal"
             data-bs-target="#modal"
           ></i>
@@ -51,16 +52,13 @@ const Home = () => {
       <section id="content" className="row py-5 justify-content-center">
         <div id="emergencias" className="row justify-content-center mb-5">
           <div className="col-2 justify-content-center d-flex">
-            <i
-              className="bi bi-hospital bg-dark-subtle p-3 rounded-4 d-flex"
-              style={{ fontSize: 80 }}
-            ></i>
+            <i className="bi bi-hospital bg-dark-subtle p-3 rounded-4 d-flex icon-size"></i>
           </div>
           <div className="col-4 align-self-center">
             <a
               id="b1"
               className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
-              href="#"
+              href="#emergencias"
             >
               Emergencias
             </a>
@@ -69,16 +67,13 @@ const Home = () => {
 
         <div id="parquimetro" className="row justify-content-center mb-5">
           <div className="col-2 justify-content-center d-flex">
-            <i
-              className="bi bi-car-front bg-dark-subtle p-3 rounded-4 d-flex"
-              style={{ fontSize: 80 }}
-            ></i>
+            <i className="bi bi-car-front bg-dark-subtle p-3 rounded-4 d-flex icon-size"></i>
           </div>
           <div className="col-4 align-self-center">
             <a
               id="b2"
               className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
-              href="#"
+              href="#parquimetro"
             >
               Parquímetro
             </a>
@@ -87,16 +82,13 @@ const Home = () => {
 
         <div id="servicios" className="row justify-content-center mb-5">
           <div className="col-2 justify-content-center d-flex">
-            <i
-              className="bi bi-lightbulb bg-dark-subtle p-3 rounded-4 d-flex"
-              style={{ fontSize: 80 }}
-            ></i>
+            <i className="bi bi-lightbulb bg-dark-subtle p-3 rounded-4 d-flex icon-size"></i>
           </div>
           <div className="col-4 align-self-center">
             <a
               id="b3"
               className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
-              href="#"
+              href="#servicios"
             >
               Servicios
             </a>
@@ -105,16 +97,13 @@ const Home = () => {
 
         <div id="comercio" className="row justify-content-center mb-5">
           <div className="col-2 justify-content-center d-flex">
-            <i
-              className="bi bi-shop bg-dark-subtle p-3 rounded-4 d-flex"
-              style={{ fontSize: 80 }}
-            ></i>
+            <i className="bi bi-shop bg-dark-subtle p-3 rounded-4 d-flex icon-size"></i>
           </div>
           <div className="col-4 align-self-center">
             <a
               id="b4"
               className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
-              href="#"
+              href="#comercio"
             >
               Comercio
             </a>
@@ -123,16 +112,13 @@ const Home = () => {
 
         <div id="denuncias" className="row justify-content-center mb-5">
           <div className="col-2 justify-content-center d-flex">
-            <i
-              className="bi bi-person-exclamation bg-dark-subtle p-3 rounded-4 d-flex"
-              style={{ fontSize: 80 }}
-            ></i>
+            <i className="bi bi-person-exclamation bg-dark-subtle p-3 rounded-4 d-flex icon-size"></i>
           </div>
           <div className="col-4 align-self-center">
             <a
               id="b5"
               className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
-              href="#"
+              href="#denuncias"
             >
               Denuncias
             </a>
@@ -141,16 +127,13 @@ const Home = () => {
 
         <div id="multas" className="row justify-content-center">
           <div className="col-2 justify-content-center d-flex">
-            <i
-              className="bi bi-sign-no-parking bg-dark-subtle p-3 rounded-4 d-flex"
-              style={{ fontSize: 80 }}
-            ></i>
+            <i className="bi bi-sign-no-parking bg-dark-subtle p-3 rounded-4 d-flex icon-size"></i>
           </div>
           <div className="col-4 align-self-center">
             <a
               id="b6"
               className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
-              href="#"
+              href="#multas"
             >
               Multas
             </a>

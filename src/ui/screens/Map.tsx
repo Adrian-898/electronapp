@@ -247,6 +247,7 @@ const Mapa = () => {
                     console.log("marcador clickeado");
                     // Centra el mapa en el marcador seleccionado
                     map.flyTo(lugar.coords);
+                    // registra el click al marcador solo cuando es distinto al de la ubicacion actual
                     lugar.id !== 0 ? MarkerPress(lugar) : null;
                   },
                 }}

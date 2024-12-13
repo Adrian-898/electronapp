@@ -1,7 +1,7 @@
 import Home from "./screens/Home";
 import Map from "./screens/Map";
 import QRScanner from "./screens/QRScanner";
-import "./app.css";
+import "./index.css";
 
 const App = () => {
   return (
@@ -17,7 +17,6 @@ const App = () => {
           {<Map />}
         </div>
       </section>
-
       <section id="tabBar" className="row fixed-bottom">
         <ol
           className="nav nav-tabs nav-underline justify-content-evenly bg-light border-2 border-top border-dark-subtle"

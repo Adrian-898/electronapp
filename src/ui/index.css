@@ -15,3 +15,8 @@ body {
 ::-webkit-scrollbar {
   display: none; /* Hides the scrollbar */
 }
+
+.tab-bar-icon {
+  font-size: 80px;
+  padding-right: 10px;
+}
