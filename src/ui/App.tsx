@@ -1,68 +1,73 @@
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./screens/Home";
 import Map from "./screens/Map";
 import QRScanner from "./screens/QRScanner";
 import "./index.css";
 
 const App = () => {
+  const [activeTab, setActiveTab] = useState("home-tab");
+
   return (
-    <>
-      <section id="tabContent" className="row tab-content h-100">
-        <div className="tab-pane show active" id="home">
-          {<Home />}
-        </div>
-        <div className="tab-pane" id="scanner">
-          {<QRScanner />}
-        </div>
-        <div className="tab-pane" id="map">
-          {<Map />}
-        </div>
-      </section>
-      <section id="tabBar" className="row fixed-bottom">
+    <Router>
+      <nav id="tabBar" className="row fixed-bottom">
         <ol
           className="nav nav-tabs nav-underline justify-content-evenly bg-light border-2 border-top border-dark-subtle"
           id="tabButtons"
         >
           <li className="nav-item">
-            <button
-              className="nav-link fs-1 fw-bold d-flex align-items-center px-4"
+            <Link
+              className={`nav-link fs-1 fw-bold d-flex align-items-center px-4 ${
+                activeTab === "scanner-tab" ? " active" : ""
+              }`}
               id="scanner-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#scanner"
               type="button"
+              to={"/QRScanner"}
+              onClick={() => setActiveTab("scanner-tab")}
             >
               <i className="bi bi-camera tab-bar-icon"></i>
               Escáner QR
-            </button>
+            </Link>
           </li>
 
           <li className="nav-item">
-            <button
-              className="nav-link fs-1 fw-bold d-flex align-items-center px-4 active"
+            <Link
+              className={`nav-link fs-1 fw-bold d-flex align-items-center px-4 ${
+                activeTab === "home-tab" ? " active" : ""
+              }`}
               id="home-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#home"
               type="button"
+              to={"/"}
+              onClick={() => setActiveTab("home-tab")}
             >
               <i className="bi bi-house-door tab-bar-icon"></i>
               Inicio
-            </button>
+            </Link>
           </li>
 
           <li className="nav-item">
-            <button
-              className="nav-link fs-1 fw-bold d-flex  align-items-center px-4"
+            <Link
+              className={`nav-link fs-1 fw-bold d-flex align-items-center px-4 ${
+                activeTab === "map-tab" ? " active" : ""
+              }`}
               id="map-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#map"
               type="button"
+              to={"/Map"}
+              onClick={() => setActiveTab("map-tab")}
             >
               <i className="bi bi-geo-alt tab-bar-icon"></i>
               Ubicación
-            </button>
+            </Link>
           </li>
         </ol>
-      </section>
-    </>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Map" element={<Map />} />
+        <Route path="/QRScanner" element={<QRScanner />} />
+      </Routes>
+    </Router>
   );
 };
 

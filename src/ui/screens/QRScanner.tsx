@@ -53,7 +53,7 @@ const QRScanner = () => {
   };
 
   return (
-    <div id="QRScanner" className="container p-5" style={{ bottom: 141.6 }}>
+    <div id="QRScanner" className="container p-5 bottom-margin">
       {/* Modal */}
       <section id="inputModal" className="modal fade">
         <div className="modal-dialog modal-dialog-centered">
@@ -156,11 +156,7 @@ const QRScanner = () => {
       />
 
       {/* footer mostrando el boton de escaneo y el boton de ingresar datos manualmente */}
-      <section
-        id="footer"
-        className="row fixed-bottom"
-        style={{ bottom: 141.6 }}
-      >
+      <section id="footer" className="row fixed-bottom bottom-margin">
         <div className="d-flex justify-content-evenly mb-5">
           {
             // Al escanear un código, se pausa la imagen y el escaneo se desactiva hasta presionar el boton.
@@ -177,8 +173,7 @@ const QRScanner = () => {
 
           {/* icono que abre el modal para ingresar datos*/}
           <i
-            className="bi bi-input-cursor-text p-3 bg-dark-subtle rounded-4 border border-2 border-dark d-flex"
-            style={{ fontSize: 80 }}
+            className="bi bi-input-cursor-text p-3 bg-dark-subtle rounded-4 border border-2 border-dark d-flex icon-size"
             data-bs-toggle="modal"
             data-bs-target="#inputModal"
           ></i>

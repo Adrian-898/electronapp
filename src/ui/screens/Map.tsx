@@ -14,6 +14,7 @@ import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import PersonIcon from "../assets/images/person-standing.svg";
 import MarkerIcon from "../assets/images/marker-icon-2x.png";
 import Shadow from "../assets/images/marker-shadow.png";
+import "./styles.css";
 
 // objeto para almacenar informacion de los lugares que se quiere marcar en el mapa
 type Lugar = {
@@ -64,16 +65,6 @@ const Mapa = () => {
   // estado del manejo de errores de rutas trazadas en el mapa
   const [routingErrorHandler, setRoutingErrorHandler] =
     useState<L.Routing.ErrorControl | null>(null);
-
-  useEffect(() => {
-    if (map) {
-      // esta funcion corrige un error de leaflet que no centra el mapa al mostrar el componente y aparece todo en la esquina superior izquierda del contenedor.
-      const i = setInterval(() => {
-        map.invalidateSize(true);
-      }, 500);
-      return () => clearInterval(i);
-    }
-  }, [map]);
 
   // Calcula la ruta en el mapa y la dibuja al usuario (usando Leaflet Routing Machine).
   useEffect(() => {
@@ -206,7 +197,7 @@ const Mapa = () => {
   };
 
   return (
-    <div id="map" className="fixed-top" style={{ bottom: 141.6 }}>
+    <div id="map" className="fixed-top bottom-margin">
       <MapContainer
         id="mapa-la-guaira"
         className="h-100"
