@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -108,7 +108,7 @@ const Mapa = () => {
       // Manejo de errores
       let errorHandler = L.Routing.errorControl(routing, {
         header:
-          "Ha ocurrido un error al calcular la ruta, por favor, intente de nuevo...",
+          "Ha ocurrido un error al calcular la ruta, por favor, espere unos minutos e intente de nuevo...",
         formatMessage: (error) => {
           console.error(
             "Ha ocurrido un error al intentar calcular una ruta.\nStatus: ",
@@ -116,7 +116,7 @@ const Mapa = () => {
             "\nMensaje: ",
             error.message
           );
-          return error.message;
+          return `"Mensaje de error: ", ${error.message}`;
         },
       }).addTo(map);
 
@@ -145,34 +145,6 @@ const Mapa = () => {
     iconAnchor: [12, 41],
     shadowUrl: Shadow,
     popupAnchor: [1, -38],
-  });
-
-  // Componente que renderiza un Marcador en el mapa
-  const MarkerComponent = memo((props: { lugar: Lugar }) => {
-    return (
-      map && (
-        <Marker
-          key={props.lugar.id}
-          position={props.lugar.coords}
-          icon={
-            // se renderiza un icono diferente para la posicion actual
-            props.lugar.id !== 0 ? markerIcon : personIcon
-          }
-          eventHandlers={{
-            click: () => {
-              console.log("marcador clickeado");
-              // se registra el click solo cuando es en un marcador distinto a la posicion actual.
-              // ! ESTA CAUSANDO UN ERROR CON EL POPUP !
-              props.lugar.id !== 0 ? MarkerPress(props.lugar) : null;
-              // centra el mapa al marcador selecionado
-              map.flyTo(props.lugar.coords);
-            },
-          }}
-        >
-          <Popup>{props.lugar.name}</Popup>
-        </Marker>
-      )
-    );
   });
 
   // al presionar un marcador
@@ -263,7 +235,24 @@ const Mapa = () => {
           // itera el arreglo lugares y renderiza un marcador para cada instancia existente
           map &&
             lugares.map((lugar, index) => (
-              <MarkerComponent lugar={lugar} key={index} />
+              <Marker
+                key={index}
+                position={lugar.coords}
+                icon={
+                  // se renderiza un icono diferente para la posicion actual
+                  lugar.id !== 0 ? markerIcon : personIcon
+                }
+                eventHandlers={{
+                  click: () => {
+                    console.log("marcador clickeado");
+                    // Centra el mapa en el marcador seleccionado
+                    map.flyTo(lugar.coords);
+                    lugar.id !== 0 ? MarkerPress(lugar) : null;
+                  },
+                }}
+              >
+                <Popup>{lugar.name}</Popup>
+              </Marker>
             ))
         }
 
