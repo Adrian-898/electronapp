@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./screens/Home";
 import Map from "./screens/Map";
 import QRScanner from "./screens/QRScanner";
+import NotFound from "./NotFound";
 import "./index.css";
 
 const App = () => {
@@ -66,6 +67,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/Map" element={<Map />} />
         <Route path="/QRScanner" element={<QRScanner />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

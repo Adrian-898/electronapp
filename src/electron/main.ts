@@ -8,7 +8,9 @@ app.on("ready", () => {
   });
   if (isDev()) {
     mainWindow.loadURL("http://localhost:8080");
+    console.log("isDevelopment");
   } else {
     mainWindow.loadFile(path.join(app.getAppPath(), "/dist-react/index.html"));
+    console.log("isProduction");
   }
 });
