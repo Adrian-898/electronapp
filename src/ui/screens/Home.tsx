@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 const Home = () => {
@@ -130,13 +131,13 @@ const Home = () => {
             <i className="bi bi-sign-no-parking bg-dark-subtle p-3 rounded-4 d-flex icon-size"></i>
           </div>
           <div className="col-4 align-self-center">
-            <a
+            <Link
               id="b6"
               className="btn btn-lg btn-primary bg-gradient border-2 border-dark fs-1 fw-bold"
-              href="#multas"
+              to="/Multas"
             >
               Multas
-            </a>
+            </Link>
           </div>
         </div>
       </section>
