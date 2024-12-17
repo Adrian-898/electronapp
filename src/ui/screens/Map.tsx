@@ -84,9 +84,8 @@ const Mapa = () => {
         }),
         // configuracion de la ventana con el itinerario de viaje:
         containerClassName:
-          "card m-3 p-1 w-100 bg-secondary-subtle bg-gradient align-items-center rounded-3 border-2 border-secondary border-opacity-50 shadow",
-        collapseBtnClass:
-          "btn btn-link p-2 bg-secondary bg-gradient rounded-1 w-100 h-100",
+          "card m-3 p-2 bg-secondary-subtle bg-gradient align-items-center rounded-2 border-2 border-secondary border-opacity-50 shadow",
+        // collapseBtnClass: "btn btn-link p-2 bg-gradient rounded-1 w-100 h-100",
         summaryTemplate: `<h5>Vía: <strong>{name}</strong></h5><h2>Distancia: <strong>{distance}</strong>, Tiempo: <strong>{time}</strong><hr><strong>Indicaciones:</strong></h2>`,
         showAlternatives: false,
         addWaypoints: false,
@@ -218,8 +217,8 @@ const Mapa = () => {
         />
 
         <ZoomControl
-          zoomInText={`<div class="bg-secondary-subtle bg-gradient fs-4">+</div>`}
-          zoomOutText={`<div class="bg-secondary-subtle bg-gradient fs-4">-</div>`}
+          zoomInText={`<div class="bg-secondary-subtle bg-gradient fs-2">+</div>`}
+          zoomOutText={`<div class="bg-secondary-subtle bg-gradient fs-2">-</div>`}
         />
 
         <AttributionControl position="bottomleft" />
