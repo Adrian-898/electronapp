@@ -12,7 +12,7 @@ import L, { type Map, type Icon } from "leaflet";
 import "leaflet-routing-machine";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import PersonIcon from "../assets/images/person-standing.svg";
-import MarkerIcon from "../assets/images/marker-icon-2x.png";
+import MarkerIcon from "../assets/images/marker.svg";
 import Shadow from "../assets/images/marker-shadow.png";
 import "./styles.css";
 
@@ -62,7 +62,7 @@ const Mapa = () => {
   // estado de existencia de la ruta trazada y su configuración en el mapa
   const [routing, setRouting] = useState<L.Routing.Control | null>(null);
 
-  // estado del manejo de errores de rutas trazadas en el mapa
+  // estado de la instancia de control de errores de leaflet de rutas trazadas en el mapa
   const [routingErrorHandler, setRoutingErrorHandler] =
     useState<L.Routing.ErrorControl | null>(null);
 
@@ -84,7 +84,7 @@ const Mapa = () => {
         }),
         // configuracion de la ventana con el itinerario de viaje:
         containerClassName:
-          "card m-3 p-1 w-100 bg-secondary-subtle bg-gradient align-items-center rounded-3 border-2 border-secondary shadow",
+          "card m-3 p-1 w-100 bg-secondary-subtle bg-gradient align-items-center rounded-3 border-2 border-secondary border-opacity-50 shadow",
         collapseBtnClass:
           "btn btn-link p-2 bg-secondary bg-gradient rounded-1 w-100 h-100",
         summaryTemplate: `<h5>Vía: <strong>{name}</strong></h5><h2>Distancia: <strong>{distance}</strong>, Tiempo: <strong>{time}</strong><hr><strong>Indicaciones:</strong></h2>`,
@@ -122,11 +122,12 @@ const Mapa = () => {
   // icono a mostrar en la ubicación del usuario (ubicacion actual del modulo de autogestion)
   const personIcon: Icon = new L.Icon({
     iconUrl: PersonIcon,
-    iconSize: [45, 65],
-    iconAnchor: [22, 32],
+    iconSize: [50, 70],
+    iconAnchor: [28, 38],
     shadowUrl: Shadow,
-    shadowAnchor: [14, 18],
-    popupAnchor: [0.5, -21],
+    shadowSize: [40, 60],
+    shadowAnchor: [17, 38],
+    popupAnchor: [-2.7, -27],
   });
 
   // icono de los marcadores en el mapa
@@ -135,7 +136,8 @@ const Mapa = () => {
     iconSize: [25, 40],
     iconAnchor: [12, 41],
     shadowUrl: Shadow,
-    popupAnchor: [1, -38],
+    shadowAnchor: [12, 42],
+    popupAnchor: [0.7, -38],
   });
 
   // al presionar un marcador
