@@ -84,7 +84,7 @@ const Mapa = () => {
         }),
         // configuracion de la ventana con el itinerario de viaje:
         containerClassName:
-          "card m-3 p-2 bg-secondary-subtle bg-gradient rounded-2 border-2 border-secondary border-opacity-50 shadow",
+          "card p-2 bg-secondary-subtle bg-gradient rounded-2 border-2 border-secondary border-opacity-50 shadow",
         // collapseBtnClass: "btn btn-link p-2 bg-gradient rounded-1 w-100 h-100",
         summaryTemplate: `<h5>Llegada por: <br/><strong>{name}</strong></h5><h2>Distancia: <strong>{distance}</strong>, Tiempo: <strong>{time}</strong><hr><strong>Indicaciones:</strong></h2>`,
         showAlternatives: false,
@@ -106,7 +106,7 @@ const Mapa = () => {
             "\nMensaje: ",
             error.message
           );
-          return `"Mensaje de error: ", ${error.message}`;
+          return error.message;
         },
       }).addTo(map);
 
