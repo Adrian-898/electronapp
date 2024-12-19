@@ -197,7 +197,7 @@ const Mapa = () => {
   };
 
   return (
-    <div id="map" className="fixed-top bottom-margin">
+    <div id="map" className="fixed-top" style={{ bottom: 141.6 }}>
       <MapContainer
         id="mapa-la-guaira"
         className="h-100"
