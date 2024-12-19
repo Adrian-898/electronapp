@@ -2,16 +2,14 @@ import "jquery";
 import { useState } from "react";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-bs5";
-import PdfPrinter from "pdfmake/build/pdfmake";
+import PdfPrinter from "pdfmake/build/pdfmake.min";
 import PdfFonts from "pdfmake/build/vfs_fonts";
 import language from "datatables.net-plugins/i18n/es-ES.mjs";
 import DATA from "../../tests/data.json";
 // import DateTime from "datatables.net-datetime";
 import "datatables.net-buttons-bs5";
-import "datatables.net-buttons/js/buttons.colVis.mjs";
+// import "datatables.net-buttons/js/buttons.colVis.mjs";
 import "datatables.net-buttons/js/buttons.html5.mjs";
-import "datatables.net-searchbuilder-bs5";
-import "datatables.net-searchpanes-bs5";
 import "./styles.css";
 
 // inicializa DataTables con estilos de Bootstrap 5
