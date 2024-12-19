@@ -1,8 +1,11 @@
 import "jquery";
+import { useState } from "react";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-bs5";
-import PdfPrinter from "pdfmake";
+import PdfPrinter from "pdfmake/build/pdfmake";
+import PdfFonts from "pdfmake/build/vfs_fonts";
 import language from "datatables.net-plugins/i18n/es-ES.mjs";
+import DATA from "../../tests/data.json";
 // import DateTime from "datatables.net-datetime";
 import "datatables.net-buttons-bs5";
 import "datatables.net-buttons/js/buttons.colVis.mjs";
@@ -11,10 +14,27 @@ import "datatables.net-searchbuilder-bs5";
 import "datatables.net-searchpanes-bs5";
 import "./styles.css";
 
+// inicializa DataTables con estilos de Bootstrap 5
 DataTable.use(DT);
+PdfPrinter.vfs = PdfFonts.vfs;
 DT.Buttons.pdfMake(PdfPrinter);
 
+// instancia de datos de prueba
+type person = {
+  id: string;
+  name: string;
+  position: string;
+  salary: string;
+  start_date: string;
+  office: string;
+  extn: string;
+};
+
 const Multas = () => {
+  // Estado de los datos de la tabla
+  const [table, _setTable] = useState<person[]>(DATA.data);
+
+  // Cambia el orden de los datos:
   const cols = [
     { data: "name" },
     { data: "position" },
@@ -29,25 +49,27 @@ const Multas = () => {
       <h1>Tabla</h1>
       <h2>DataTables + React</h2>
       <DataTable
-        className="container w-100"
-        ajax="/src/tests/data.json"
-        columns={cols}
-        onDraw={() => console.log("Tabla dibujada")}
+        className="w-100"
+        onDraw={() => {
+          console.log("Tabla Dibujada");
+        }}
         options={{
-          language,
+          data: table,
+          columns: cols,
           layout: {
             topStart: "buttons",
           },
+          language,
         }}
       >
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
+            <th>Nombre</th>
+            <th>Cargo</th>
+            <th>Oficina</th>
             <th>Extn.</th>
-            <th>Start date</th>
-            <th>Salary</th>
+            <th>Fecha de inicio</th>
+            <th>Salario</th>
           </tr>
         </thead>
       </DataTable>
