@@ -8,8 +8,9 @@ import language from "datatables.net-plugins/i18n/es-ES.mjs";
 import DATA from "../../tests/data.json";
 // import DateTime from "datatables.net-datetime";
 import "datatables.net-buttons-bs5";
-// import "datatables.net-buttons/js/buttons.colVis.mjs";
+import "datatables.net-buttons/js/buttons.colVis.mjs";
 import "datatables.net-buttons/js/buttons.html5.mjs";
+import "datatables.net-staterestore-bs5";
 import "./styles.css";
 
 // Inicializa DataTables con estilos de Bootstrap 5
@@ -54,12 +55,18 @@ const Multas = () => {
           console.log("Tabla Dibujada");
         }}
         options={{
+          autoWidth: false,
           data: table,
           columns: cols,
-          layout: {
-            topStart: "buttons",
-          },
           language,
+          layout: {
+            topStart: {
+              buttons: [
+                { extend: "copy", className: "bg-primary bg-gradient" },
+                { extend: "pdf", className: "bg-primary bg-gradient" },
+              ],
+            },
+          },
         }}
       >
         <thead>
