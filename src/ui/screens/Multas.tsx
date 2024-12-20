@@ -49,44 +49,46 @@ const Multas = () => {
     <div id="multas" className="container bottom-margin">
       <h1>Tabla Multas</h1>
       <hr />
-      <DataTable
-        className="w-100 table table-light table-bordered table-group-divider table-striped border-primary-subtle"
-        onDraw={() => {
-          console.log("Tabla Dibujada");
-        }}
-        options={{
-          autoWidth: false,
-          data: table,
-          columns: cols,
-          language,
-          columnDefs: [{ orderable: true, target: 0 }],
-          ordering: false,
-          layout: {
-            topStart: {
-              buttons: [
-                {
-                  extend: "pdf",
-                  text: "",
-                  titleAttr: "Exportar a PDF",
+      <div className="row">
+        <DataTable
+          className="w-100 table table-light table-bordered table-group-divider table-striped border-primary-subtle"
+          onDraw={() => {
+            console.log("Tabla Dibujada");
+          }}
+          options={{
+            autoWidth: false,
+            data: table,
+            columns: cols,
+            language,
+            columnDefs: [{ orderable: true, target: 0 }],
+            ordering: false,
+            layout: {
+              topStart: {
+                buttons: [
+                  {
+                    extend: "pdf",
+                    text: "",
+                    titleAttr: "Exportar a PDF",
 
-                  className: "bi bi-filetype-pdf fs-2 bg-danger bg-gradient",
-                },
-              ],
+                    className: "bi bi-filetype-pdf fs-2 bg-danger bg-gradient",
+                  },
+                ],
+              },
             },
-          },
-        }}
-      >
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Cargo</th>
-            <th>Oficina</th>
-            <th>Extn.</th>
-            <th>Fecha de inicio</th>
-            <th>Salario</th>
-          </tr>
-        </thead>
-      </DataTable>
+          }}
+        >
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Cargo</th>
+              <th>Oficina</th>
+              <th>Extn.</th>
+              <th>Fecha de inicio</th>
+              <th>Salario</th>
+            </tr>
+          </thead>
+        </DataTable>
+      </div>
       <hr />
     </div>
   );
