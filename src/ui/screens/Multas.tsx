@@ -12,9 +12,11 @@ import "datatables.net-buttons-bs5";
 import "datatables.net-buttons/js/buttons.html5.mjs";
 import "./styles.css";
 
-// inicializa DataTables con estilos de Bootstrap 5
+// Inicializa DataTables con estilos de Bootstrap 5
 DataTable.use(DT);
+// Asigna fonts a PdfMake para exportar la tabla
 PdfPrinter.vfs = PdfFonts.vfs;
+// Agrega los botones
 DT.Buttons.pdfMake(PdfPrinter);
 
 // instancia de datos de prueba
@@ -47,7 +49,7 @@ const Multas = () => {
       <h1>Tabla</h1>
       <h2>DataTables + React</h2>
       <DataTable
-        className="w-100"
+        className="w-100 table table-light table-bordered table-group-divider table-striped border-primary-subtle"
         onDraw={() => {
           console.log("Tabla Dibujada");
         }}
