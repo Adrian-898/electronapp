@@ -1,12 +1,11 @@
 import "jquery";
-import { useState } from "react";
+// import { useState } from "react";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-bs5";
 import PdfPrinter from "pdfmake/build/pdfmake.min";
 import PdfFonts from "pdfmake/build/vfs_fonts";
 import language from "datatables.net-plugins/i18n/es-ES.mjs";
-import DATA from "../../tests/data.json";
-// import DateTime from "datatables.net-datetime";
+// import getErrorMessage from "../../utils/getErrorMessage";
 import "datatables.net-buttons-bs5";
 import "datatables.net-buttons/js/buttons.colVis.mjs";
 import "datatables.net-buttons/js/buttons.html5.mjs";
@@ -20,31 +19,68 @@ PdfPrinter.vfs = PdfFonts.vfs;
 // Agrega los botones
 DT.Buttons.pdfMake(PdfPrinter);
 
+/*
 // instancia de datos de prueba
-type person = {
-  id: string;
+type User = {
+  id: number;
   name: string;
-  position: string;
-  salary: string;
-  start_date: string;
-  office: string;
-  extn: string;
+  username: string;
+  email: string;
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: {
+      lat: string;
+      lng: string;
+    };
+  };
+  phone: string;
+  website: string;
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+  };
 };
+*/
 
 const Multas = () => {
   // Estado de los datos de la tabla
-  const [table, _setTable] = useState<person[]>(DATA.data);
+  // const [table, setTable] = useState<User[]>();
 
   // Cambia el orden de los datos:
   const cols = [
     { data: "name" },
-    { data: "position" },
-    { data: "office" },
-    { data: "extn" },
-    { data: "start_date" },
-    { data: "salary" },
+    { data: "username" },
+    { data: "email" },
+    { data: "address.street" },
+    { data: "phone" },
+    { data: "website" },
+    { data: "company.name" },
   ];
 
+  /*
+  // GET a la API para obtener los datos de la tabla
+  const listUsers = async () => {
+    try {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      let data = await response.json();
+      console.log(data);
+      setTable(data);
+    } catch (error) {
+      console.error("Ha ocurrido un error: ", getErrorMessage(error));
+    }
+  };
+*/
+  /*
+  window.addEventListener("load", async () => {
+    await listUsers();
+  });
+*/
   return (
     <div id="multas" className="container bottom-margin">
       <h1>Tabla Multas</h1>
@@ -57,10 +93,12 @@ const Multas = () => {
           }}
           options={{
             autoWidth: false,
-            data: table,
+            ajax: {
+              url: "https://jsonplaceholder.typicode.com/users",
+              dataSrc: "",
+            },
             columns: cols,
             language,
-            columnDefs: [{ orderable: true, target: 0 }],
             ordering: false,
             layout: {
               topStart: {
@@ -79,12 +117,13 @@ const Multas = () => {
         >
           <thead>
             <tr>
-              <th>Nombre</th>
-              <th>Cargo</th>
-              <th>Oficina</th>
-              <th>Extn.</th>
-              <th>Fecha de inicio</th>
-              <th>Salario</th>
+              <th>Nombre Completo</th>
+              <th>Nombre de Usuario</th>
+              <th>E-Mail</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
+              <th>Sitio Web</th>
+              <th>Empresa</th>
             </tr>
           </thead>
         </DataTable>
