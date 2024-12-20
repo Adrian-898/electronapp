@@ -46,9 +46,9 @@ const Multas = () => {
   ];
 
   return (
-    <div id="multas" className="container-fluid bottom-margin">
-      <h1>Tabla</h1>
-      <h2>DataTables + React</h2>
+    <div id="multas" className="container bottom-margin">
+      <h1>Tabla Multas</h1>
+      <hr />
       <DataTable
         className="w-100 table table-light table-bordered table-group-divider table-striped border-primary-subtle"
         onDraw={() => {
@@ -59,11 +59,18 @@ const Multas = () => {
           data: table,
           columns: cols,
           language,
+          columnDefs: [{ orderable: true, target: 0 }],
+          ordering: false,
           layout: {
             topStart: {
               buttons: [
-                { extend: "copy", className: "bg-primary bg-gradient" },
-                { extend: "pdf", className: "bg-primary bg-gradient" },
+                {
+                  extend: "pdf",
+                  text: "",
+                  titleAttr: "Exportar a PDF",
+
+                  className: "bi bi-filetype-pdf fs-2 bg-danger bg-gradient",
+                },
               ],
             },
           },
@@ -80,6 +87,7 @@ const Multas = () => {
           </tr>
         </thead>
       </DataTable>
+      <hr />
     </div>
   );
 };
