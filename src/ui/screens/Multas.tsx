@@ -1,6 +1,7 @@
 import "jquery";
 // import { useState } from "react";
 // import getErrorMessage from "../../utils/getErrorMessage";
+import BackButton from "../components/BackButton";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-bs5";
 import PdfPrinter from "pdfmake/build/pdfmake.min";
@@ -80,13 +81,21 @@ const Multas = () => {
     listUsers();
   }, []);
 */
+
   return (
     <div id="multas" className="container bottom-margin">
-      <h1>Tabla Multas</h1>
+      <div className="row container mt-4">
+        <div className="col-1">
+          <BackButton />
+        </div>
+        <div className="col-10">
+          <h1 className="text-center">Tabla Multas</h1>
+        </div>
+      </div>
       <hr />
-      <div className="row">
+      <div className="row container">
         <DataTable
-          className="w-100 table table-light table-bordered table-group-divider table-striped border-primary-subtle"
+          className="table table-light table-bordered table-group-divider table-striped border-primary-subtle"
           options={{
             autoWidth: false,
             ordering: false,
