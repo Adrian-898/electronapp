@@ -1,11 +1,11 @@
 import "jquery";
 // import { useState } from "react";
+// import getErrorMessage from "../../utils/getErrorMessage";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-bs5";
 import PdfPrinter from "pdfmake/build/pdfmake.min";
 import PdfFonts from "pdfmake/build/vfs_fonts";
 import language from "datatables.net-plugins/i18n/es-ES.mjs";
-// import getErrorMessage from "../../utils/getErrorMessage";
 import "datatables.net-buttons-bs5";
 import "datatables.net-buttons/js/buttons.colVis.mjs";
 import "datatables.net-buttons/js/buttons.html5.mjs";
@@ -50,7 +50,7 @@ const Multas = () => {
   // Estado de los datos de la tabla
   // const [table, setTable] = useState<User[]>();
 
-  // Cambia el orden de los datos:
+  // Cambia el orden de muestra de los datos por cada columna:
   const cols = [
     { data: "name" },
     { data: "username" },
@@ -62,24 +62,23 @@ const Multas = () => {
   ];
 
   /*
-  // GET a la API para obtener los datos de la tabla
-  const listUsers = async () => {
-    try {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
-      );
-      let data = await response.json();
-      console.log(data);
-      setTable(data);
-    } catch (error) {
-      console.error("Ha ocurrido un error: ", getErrorMessage(error));
-    }
-  };
-*/
-  /*
-  window.addEventListener("load", async () => {
-    await listUsers();
-  });
+  useEffect(() => {
+  // GET a la API para obtener los datos de la tabla, no se usa porque la propiedad ajax de DataTables maneja esto automaticamente...
+    const listUsers = async () => {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        let data = await response.json();
+        console.log(data);
+        setTable(data);
+      } catch (error) {
+        console.error("Ha ocurrido un error: ", getErrorMessage(error));
+      }
+    };
+
+    listUsers();
+  }, []);
 */
   return (
     <div id="multas" className="container bottom-margin">
@@ -88,18 +87,16 @@ const Multas = () => {
       <div className="row">
         <DataTable
           className="w-100 table table-light table-bordered table-group-divider table-striped border-primary-subtle"
-          onDraw={() => {
-            console.log("Tabla Dibujada");
-          }}
           options={{
             autoWidth: false,
+            ordering: false,
+            language,
+            columns: cols,
             ajax: {
               url: "https://jsonplaceholder.typicode.com/users",
+              // dataSrc: "", permite leer los datos recibidos del fetch cuando vienen en forma de array de objetos sin nombre.
               dataSrc: "",
             },
-            columns: cols,
-            language,
-            ordering: false,
             layout: {
               topStart: {
                 buttons: [
@@ -107,7 +104,7 @@ const Multas = () => {
                     extend: "pdf",
                     text: "",
                     titleAttr: "Exportar a PDF",
-
+                    // Icono de PDF y estilos del boton:
                     className: "bi bi-filetype-pdf fs-2 bg-danger bg-gradient",
                   },
                 ],
