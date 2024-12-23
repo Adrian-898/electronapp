@@ -6,7 +6,6 @@ import DataTable from "datatables.net-react";
 import DT from "datatables.net-bs5";
 import PdfPrinter from "pdfmake/build/pdfmake.min";
 import PdfFonts from "pdfmake/build/vfs_fonts";
-import language from "datatables.net-plugins/i18n/es-ES.mjs";
 import "datatables.net-buttons-bs5";
 import "datatables.net-buttons/js/buttons.colVis.mjs";
 import "datatables.net-buttons/js/buttons.html5.mjs";
@@ -99,8 +98,23 @@ const Multas = () => {
           options={{
             autoWidth: false,
             ordering: false,
-            language,
             columns: cols,
+            language: {
+              zeroRecords: "No se han encontrado registros...",
+              decimal: ",",
+              emptyTable: "No hay datos para mostrar...",
+              loadingRecords: "Cargando información...",
+              infoEmpty: "No hay registros para mostrar",
+              infoFiltered: "(filtrados de un total de _MAX_ registros)",
+              info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+              search: "Buscar:",
+              searchPlaceholder: "Escribe aquí...",
+              thousands: ".",
+              entries: {
+                _: "registros",
+                1: "registro",
+              },
+            },
             ajax: {
               url: "https://jsonplaceholder.typicode.com/users",
               // dataSrc: "", permite leer los datos recibidos del fetch cuando vienen en forma de array de objetos sin nombre.
