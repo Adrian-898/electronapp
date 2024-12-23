@@ -4,8 +4,13 @@ const BackButton = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate(-1);
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
   };
+
   return (
     <div
       className="btn-link start-0 top-0 m-0 p-0"
