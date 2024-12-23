@@ -55,7 +55,7 @@ const Multas = () => {
     { data: "name" },
     { data: "username" },
     { data: "email" },
-    { data: "address.street" },
+    { data: "address.city" },
     { data: "phone" },
     { data: "website" },
     { data: "company.name" },
