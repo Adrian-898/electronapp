@@ -99,22 +99,6 @@ const Multas = () => {
             autoWidth: false,
             ordering: false,
             columns: cols,
-            language: {
-              zeroRecords: "No se han encontrado registros...",
-              decimal: ",",
-              emptyTable: "No hay datos para mostrar...",
-              loadingRecords: "Cargando información...",
-              infoEmpty: "No hay registros para mostrar",
-              infoFiltered: "(filtrados de un total de _MAX_ registros)",
-              info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-              search: "Buscar:",
-              searchPlaceholder: "Escribe aquí...",
-              thousands: ".",
-              entries: {
-                _: "registros",
-                1: "registro",
-              },
-            },
             ajax: {
               url: "https://jsonplaceholder.typicode.com/users",
               // dataSrc: "", permite leer los datos recibidos del fetch cuando vienen en forma de array de objetos sin nombre.
@@ -131,6 +115,23 @@ const Multas = () => {
                     className: "bi bi-filetype-pdf fs-2 bg-danger bg-gradient",
                   },
                 ],
+              },
+            },
+            language: {
+              processing: "Procesando...",
+              zeroRecords: "No se han encontrado registros...",
+              decimal: ",",
+              emptyTable: "No hay datos para mostrar...",
+              loadingRecords: "Cargando información...",
+              infoEmpty: "No hay registros para mostrar",
+              infoFiltered: "(filtrados de un total de _MAX_ registros)",
+              info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+              search: "Buscar:",
+              searchPlaceholder: "Escribe aquí...",
+              thousands: ".",
+              entries: {
+                _: "registros",
+                1: "registro",
               },
             },
           }}
