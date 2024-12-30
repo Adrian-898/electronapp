@@ -7,9 +7,7 @@ import DT from "datatables.net-bs5";
 import PdfPrinter from "pdfmake/build/pdfmake.min";
 import PdfFonts from "pdfmake/build/vfs_fonts";
 import "datatables.net-buttons-bs5";
-import "datatables.net-buttons/js/buttons.colVis.mjs";
 import "datatables.net-buttons/js/buttons.html5.mjs";
-import "datatables.net-staterestore-bs5";
 import "./styles.css";
 
 // Inicializa DataTables con estilos de Bootstrap 5
