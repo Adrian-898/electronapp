@@ -5,18 +5,12 @@ import { useLocation } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-bs5";
-import PdfPrinter from "pdfmake/build/pdfmake.min";
-import PdfFonts from "pdfmake/build/vfs_fonts";
-import "datatables.net-buttons-bs5";
-import "datatables.net-buttons/js/buttons.html5.mjs";
+// import "datatables.net-buttons-bs5";
+// import "datatables.net-buttons/js/buttons.html5.mjs";
 import "./styles.css";
 
 // Inicializa DataTables con estilos de Bootstrap 5
 DataTable.use(DT);
-// Asigna fonts a PdfMake para exportar la tabla
-PdfPrinter.vfs = PdfFonts.vfs;
-// Agrega los botones
-DT.Buttons.pdfMake(PdfPrinter);
 
 /*
 // instancia de datos de prueba
