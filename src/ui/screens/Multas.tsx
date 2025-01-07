@@ -32,7 +32,8 @@ const Multas = () => {
         <form id="cedulaForm" onSubmit={handleForm}>
           <div className="row mb-4">
             <label htmlFor="cedula" className="form-label fs-2">
-              Ingresa tu cédula de identidad sin letras ni separadores de cifras
+              Ingresa tu cédula de identidad (sin letras ni separadores de
+              cifras)
             </label>
           </div>
           <div className="row">
