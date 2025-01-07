@@ -1,5 +1,6 @@
 import "jquery";
 // import { useState } from "react";
+import { useLocation } from "react-router-dom";
 // import getErrorMessage from "../../utils/getErrorMessage";
 import BackButton from "../components/BackButton";
 import DataTable from "datatables.net-react";
@@ -45,6 +46,9 @@ type User = {
 */
 
 const PagarMultas = () => {
+  // hook para acceder al estado enviado desde el componente padre (Multas.tsx)
+  const location = useLocation();
+
   // Estado de los datos de la tabla
   // const [table, setTable] = useState<User[]>();
 
@@ -86,7 +90,7 @@ const PagarMultas = () => {
           <BackButton />
         </div>
         <div className="col-10">
-          <h1 className="text-center">Tabla Multas</h1>
+          <h1 className="text-center">Resultados de consulta</h1>
         </div>
       </div>
       <hr />
@@ -104,33 +108,28 @@ const PagarMultas = () => {
             },
             layout: {
               topStart: {
-                buttons: [
-                  {
-                    extend: "pdf",
-                    text: "",
-                    titleAttr: "Exportar a PDF",
-                    // Icono de PDF y estilos del boton:
-                    className: "bi bi-filetype-pdf fs-2 bg-danger bg-gradient",
-                  },
-                ],
+                div: {
+                  text: `Multas de: ${location.state}`,
+                  className: "fs-1",
+                },
               },
             },
             language: {
               processing: "Procesando...",
-              zeroRecords: "No se han encontrado registros...",
+              zeroRecords: "No hay multas para mostrar",
               decimal: ",",
-              emptyTable: "No hay datos para mostrar...",
+              thousands: ".",
+              emptyTable: "Este usuario no tiene multas asignadas...",
               loadingRecords: "Cargando información...",
-              infoEmpty: "No hay registros para mostrar",
-              infoFiltered: "(filtrados de un total de _MAX_ _ENTRIES_)",
+              infoEmpty: "No hay multas para mostrar",
+              infoFiltered: "",
               info: "Mostrando _START_ a _END_ de _TOTAL_ _ENTRIES_",
               search: "Buscar:",
               searchPlaceholder: "Escribe aquí...",
-              thousands: ".",
               lengthMenu: "Mostrar _MENU_ registros",
               entries: {
-                _: "registros",
-                1: "registro",
+                _: "multas",
+                1: "multa",
               },
             },
           }}
