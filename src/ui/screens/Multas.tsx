@@ -3,13 +3,29 @@ import { useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import "./styles.css";
 
+// Expresion regular para validar el input
+const expression = {
+  cedula: /^\d{1,8}$/, // 1 a 8 numeros.
+};
+
 const Multas = () => {
-  const [cedula, setCedula] = useState<number | string>("");
+  const [cedula, setCedula] = useState("");
+  const [valid, setValid] = useState(false);
   const navigate = useNavigate();
 
-  // manejo de los datos del form (ingreso manual de datos)
+  // Validacion de datos del input
+  const handleValidation = () => {
+    if (expression.cedula.test(cedula)) {
+      setValid(true);
+    } else {
+      setValid(false);
+    }
+  };
+
+  // Ejecutado al hacer submit con un valor de cedula valido
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     console.log(cedula);
     navigate("/PagarMultas", { state: cedula });
   };
@@ -32,28 +48,38 @@ const Multas = () => {
         <form id="cedulaForm" onSubmit={handleForm}>
           <div className="row mb-4">
             <label htmlFor="cedula" className="form-label fs-2">
-              Ingresa tu cédula de identidad (sin letras ni separadores de
-              cifras)
+              Ingresa tu número de cédula
             </label>
           </div>
           <div className="row">
             <input
               id="cedula"
-              type="number"
+              type="text"
               required
-              min={1}
               placeholder="Ejemplo: 25345678"
               className="form-control form-control-lg fs-3 border-1 border-dark-subtle"
               value={cedula}
-              onChange={(e) => setCedula(e.target.valueAsNumber)}
+              onKeyUp={() => {
+                handleValidation();
+              }}
+              onBlur={() => {
+                handleValidation();
+              }}
+              onChange={(e) => setCedula(e.target.value)}
             />
           </div>
+          {!valid && (
+            <p className="text-danger fs-4 fw-bold mt-1">
+              No debe contener letras, signos o símbolos de ningún tipo.
+            </p>
+          )}
         </form>
       </div>
       <div className="row container justify-content-center">
         <div id="boton-buscar" className="col-2 text-center">
           <button
             type="submit"
+            disabled={!valid}
             className="btn btn-primary bg-gradient border-2 fs-1 m-2"
             form="cedulaForm"
           >
