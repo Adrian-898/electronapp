@@ -108,10 +108,19 @@ const Multas = () => {
         <Keyboard
           layout={SpanishLayout.layout}
           autoUseTouchEvents
-          debug
           disableButtonHold
           newLineOnEnter={false}
-          physicalKeyboardHighlight
+          tabCharOnTab={false}
+          updateCaretOnSelectionChange
+          debug
+          display={{
+            ["{bksp}"]: "borrar",
+            ["{enter}"]: "enter",
+            ["{shift}"]: "shift",
+            ["{lock}"]: "bloq. de mayús.",
+            ["{tab}"]: "tab",
+            ["{space}"]: " ",
+          }}
           onChange={(e) => {
             setCedula(e);
           }}
