@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Keyboard from "react-simple-keyboard";
+import SpanishLayout from "simple-keyboard-layouts/build/layouts/spanish";
 import "react-simple-keyboard/build/css/index.css";
 import "./styles.css";
 
@@ -62,6 +63,7 @@ const Multas = () => {
               type="text"
               required
               placeholder="Ejemplo: 25345678"
+              color="red"
               className={`form-control form-control-lg fs-3 border-2 ${
                 valid ? "border-success" : "border-dark-subtle"
               }`}
@@ -104,12 +106,18 @@ const Multas = () => {
       </section>
       <div className="row container position-fixed bottom-0 bottom-margin pb-5">
         <Keyboard
+          layout={SpanishLayout.layout}
           autoUseTouchEvents
           debug
           disableButtonHold
           newLineOnEnter={false}
-          layoutName="default"
           physicalKeyboardHighlight
+          onChange={(e) => {
+            setCedula(e);
+          }}
+          onKeyReleased={() => {
+            handleValidation();
+          }}
         />
       </div>
     </div>
