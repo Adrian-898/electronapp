@@ -9,8 +9,11 @@ const expression = {
 };
 
 const Multas = () => {
+  // valor del input
   const [cedula, setCedula] = useState("");
-  const [valid, setValid] = useState(false);
+  // validez del input
+  const [valid, setValid] = useState<boolean>();
+  // Hook de navegacion de react-router-dom
   const navigate = useNavigate();
 
   // Validacion de datos del input
@@ -32,16 +35,16 @@ const Multas = () => {
 
   return (
     <div id="multas" className="container bottom-margin">
-      <div className="row container mt-4">
+      <section id="header" className="row container mt-4">
         <div className="col-1">
           <BackButton />
         </div>
         <div className="col-10">
           <h1 className="text-center">Consultar Multas</h1>
         </div>
-      </div>
+      </section>
       <hr />
-      <div
+      <section
         id="cedulaInput"
         className="row container justify-content-center mb-4"
       >
@@ -71,15 +74,21 @@ const Multas = () => {
             />
 
             {!valid && (
-              <p className="text-danger fs-4 fw-bold mt-1">
+              <p
+                className="text-danger fs-4 fw-bold mt-1"
+                hidden={valid === undefined}
+              >
                 Debe contener de 1 a 8 números. Sin letras, signos o símbolos de
                 ningún tipo.
               </p>
             )}
           </div>
         </form>
-      </div>
-      <div className="row container justify-content-center">
+      </section>
+      <section
+        id="submit-button"
+        className="row container justify-content-center"
+      >
         <div id="boton-buscar" className="text-center">
           <button
             type="submit"
@@ -90,7 +99,7 @@ const Multas = () => {
             Buscar
           </button>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
