@@ -74,7 +74,7 @@ const QRScanner = () => {
                     <select
                       id="parquimetro"
                       required
-                      className="form-select form-select-lg fs-3 border-1 border-dark-subtle"
+                      className="form-select form-select-lg fs-3 border-2 border-dark-subtle"
                       value={parquimetro}
                       onChange={(e) => setParquimetro(e.target.value)}
                     >
@@ -97,7 +97,7 @@ const QRScanner = () => {
                       required
                       min={1}
                       placeholder="Ingresa tu puesto"
-                      className="form-control form-control-lg fs-3 border-1 border-dark-subtle"
+                      className="form-control form-control-lg fs-3 border-2 border-dark-subtle"
                       value={puesto}
                       onChange={(e) => setPuesto(e.target.valueAsNumber)}
                     />
