@@ -7,7 +7,7 @@ const QRScanner = () => {
   // estado de escaneo de QR, se usa para mostrar el botón de escaneo de nuevo
   const [scanned, setScanned] = useState<boolean>(true);
 
-  // datos del form
+  // valores del form
   const [parquimetro, setParquimetro] = useState<string>("");
   const [puesto, setPuesto] = useState<string | number>("");
 
@@ -35,7 +35,7 @@ const QRScanner = () => {
     );
   };
 
-  // manejo de los datos del form (ingreso manual de datos)
+  // control de los datos del form al hacer submit
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (parquimetro !== "" && puesto !== "") {
