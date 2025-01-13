@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
+import Keyboard from "react-simple-keyboard";
+import "react-simple-keyboard/build/css/index.css";
 import "./styles.css";
 
 // Expresion regular para validar el input
@@ -100,6 +102,16 @@ const Multas = () => {
           </button>
         </div>
       </section>
+      <div className="row container position-fixed bottom-0 bottom-margin pb-5">
+        <Keyboard
+          autoUseTouchEvents
+          debug
+          disableButtonHold
+          newLineOnEnter={false}
+          layoutName="default"
+          physicalKeyboardHighlight
+        />
+      </div>
     </div>
   );
 };
