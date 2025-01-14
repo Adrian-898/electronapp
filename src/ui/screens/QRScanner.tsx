@@ -3,13 +3,29 @@ import { Scanner } from "@yudiel/react-qr-scanner";
 import type { IDetectedBarcode } from "@yudiel/react-qr-scanner";
 import getErrorMessage from "../../utils/getErrorMessage";
 
+const expression = {
+  puesto: /\b[1-9][0-9]*\b/,
+};
+
 const QRScanner = () => {
   // estado de escaneo de QR, se usa para mostrar el botón de escaneo de nuevo
   const [scanned, setScanned] = useState<boolean>(true);
 
   // valores de los inputs del form
   const [parquimetro, setParquimetro] = useState<string>("");
-  const [puesto, setPuesto] = useState<string | number>("");
+  const [puesto, setPuesto] = useState<string>("");
+
+  // validez del input puesto
+  const [validPuesto, setValidPuesto] = useState<boolean>();
+
+  // Validacion de datos del input
+  const handleValidation = () => {
+    if (expression.puesto.test(puesto)) {
+      setValidPuesto(true);
+    } else {
+      setValidPuesto(false);
+    }
+  };
 
   // funcion ejecutada al leer un QR
   const handleBarCodeScan = (result: IDetectedBarcode[]) => {
@@ -74,7 +90,11 @@ const QRScanner = () => {
                     <select
                       id="parquimetro"
                       required
-                      className="form-select form-select-lg fs-3 border-2 border-dark-subtle"
+                      className={`form-select form-select-lg fs-3 border-2 ${
+                        parquimetro !== ""
+                          ? "border-success"
+                          : "border-dark-subtle"
+                      }`}
                       value={parquimetro}
                       onChange={(e) => setParquimetro(e.target.value)}
                     >
@@ -93,14 +113,31 @@ const QRScanner = () => {
                     </label>
                     <input
                       id="numeroPuesto"
-                      type="number"
+                      type="text"
                       required
-                      min={1}
                       placeholder="Ingresa tu puesto"
-                      className="form-control form-control-lg fs-3 border-2 border-dark-subtle"
+                      className={`form-control form-control-lg fs-3 border-2 ${
+                        validPuesto ? "border-success" : "border-dark-subtle"
+                      }`}
                       value={puesto}
-                      onChange={(e) => setPuesto(e.target.valueAsNumber)}
+                      onKeyUp={() => {
+                        handleValidation();
+                      }}
+                      onBlur={() => {
+                        handleValidation();
+                      }}
+                      onChange={(e) => setPuesto(e.target.value)}
                     />
+
+                    {!validPuesto && (
+                      <p
+                        className="text-danger fs-4 fw-bold mt-1"
+                        hidden={validPuesto === undefined}
+                      >
+                        Debe contener uno o más números (sin ceros a la
+                        izquierda).
+                      </p>
+                    )}
                   </div>
                 </form>
               </div>
@@ -116,6 +153,7 @@ const QRScanner = () => {
               </button>
               <button
                 type="submit"
+                disabled={!validPuesto}
                 className="btn btn-primary bg-gradient border-2 fs-1 fw-bold"
                 form="parquimetroForm"
               >
