@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Keyboard from "react-simple-keyboard";
-import SpanishLayout from "simple-keyboard-layouts/build/layouts/spanish";
 import "react-simple-keyboard/build/css/index.css";
 import "./styles.css";
 
@@ -18,6 +17,8 @@ const Multas = () => {
   const [valid, setValid] = useState<boolean>();
   // Hook de navegacion de react-router-dom, se usa para navegar a la pantalla de los resultados de la consulta
   const navigate = useNavigate();
+  // tipo de teclado activo
+  const [keyboardLayout, setKeyboardLayout] = useState(false);
 
   // Validacion de datos del input
   const handleValidation = () => {
@@ -114,7 +115,17 @@ const Multas = () => {
       {/* Teclado Virtual */}
       <section className="row container position-fixed bottom-0 bottom-margin pb-5">
         <Keyboard
-          layout={SpanishLayout.layout}
+          theme="hg-theme-default hg-layout-numeric numeric-theme"
+          layout={{
+            default: ["1 2 3", "4 5 6", "7 8 9", "{shift} 0 _", "{bksp}"],
+            shift: ["! / #", "$ % ^", "& * (", "{shift} ) +", "{bksp}"],
+          }}
+          onKeyPress={(button) => {
+            if (button === "{shift}") {
+              setKeyboardLayout(!keyboardLayout);
+            }
+          }}
+          layoutName={keyboardLayout ? "shift" : "default"}
           autoUseTouchEvents
           disableButtonHold
           newLineOnEnter={false}
@@ -122,11 +133,7 @@ const Multas = () => {
           updateCaretOnSelectionChange
           display={{
             ["{bksp}"]: "borrar",
-            ["{enter}"]: "enter",
             ["{shift}"]: "shift",
-            ["{lock}"]: "bloq. de mayús.",
-            ["{tab}"]: "tab",
-            ["{space}"]: " ",
           }}
           onChange={(e) => {
             setCedula(e);

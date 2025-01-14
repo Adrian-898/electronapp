@@ -3,7 +3,6 @@ import { Scanner } from "@yudiel/react-qr-scanner";
 import type { IDetectedBarcode } from "@yudiel/react-qr-scanner";
 import getErrorMessage from "../../utils/getErrorMessage";
 import Keyboard from "react-simple-keyboard";
-import SpanishLayout from "simple-keyboard-layouts/build/layouts/spanish";
 import "react-simple-keyboard/build/css/index.css";
 
 const expression = {
@@ -20,6 +19,9 @@ const QRScanner = () => {
 
   // validez del input puesto
   const [validPuesto, setValidPuesto] = useState<boolean>();
+
+  // tipo de teclado activo
+  const [keyboardLayout, setKeyboardLayout] = useState(false);
 
   // Validacion de datos del input
   const handleValidation = () => {
@@ -167,20 +169,26 @@ const QRScanner = () => {
         </div>
 
         {/* Teclado Virtual */}
-        <section className="row container-fluid position-fixed bottom-0 bottom-margin">
+        <section className="row container-fluid position-fixed bottom-0 mb-2">
           <Keyboard
-            layout={SpanishLayout.layout}
+            theme="hg-theme-default hg-layout-numeric numeric-theme"
+            layout={{
+              default: ["1 2 3", "4 5 6", "7 8 9", "{shift} 0 _", "{bksp}"],
+              shift: ["! / #", "$ % ^", "& * (", "{shift} ) +", "{bksp}"],
+            }}
+            onKeyPress={(button) => {
+              if (button === "{shift}") {
+                setKeyboardLayout(!keyboardLayout);
+              }
+            }}
+            layoutName={keyboardLayout ? "shift" : "default"}
             autoUseTouchEvents
             disableButtonHold
             newLineOnEnter={false}
             tabCharOnTab={false}
             display={{
               ["{bksp}"]: "borrar",
-              ["{enter}"]: "enter",
               ["{shift}"]: "shift",
-              ["{lock}"]: "bloq. de mayús.",
-              ["{tab}"]: "tab",
-              ["{space}"]: " ",
             }}
             onChange={(e) => {
               setPuesto(e);
