@@ -7,7 +7,7 @@ const QRScanner = () => {
   // estado de escaneo de QR, se usa para mostrar el botón de escaneo de nuevo
   const [scanned, setScanned] = useState<boolean>(true);
 
-  // valores del form
+  // valores de los inputs del form
   const [parquimetro, setParquimetro] = useState<string>("");
   const [puesto, setPuesto] = useState<string | number>("");
 
@@ -54,7 +54,7 @@ const QRScanner = () => {
 
   return (
     <div id="QRScanner" className="container p-5 bottom-margin">
-      {/* Modal */}
+      {/* Modal para input manual de datos */}
       <section id="inputModal" className="modal fade">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">

@@ -109,6 +109,7 @@ const Mapa = () => {
         },
       }).addTo(map);
 
+      // Se renderiza la ruta, el control de errores (si existen errores) y se activa el boton de eliminar ruta.
       if (routing) {
         setRouting(routing);
         setRoutingErrorHandler(errorHandler);
@@ -183,7 +184,7 @@ const Mapa = () => {
     );
   };
 
-  // al presionar el boton para eliminar ruta:
+  // al presionar el boton para eliminar ruta se ejecuta:
   const RemoveRouteButtonPress = () => {
     if (map && routing && removeRouteButton) {
       setRemoveRouteButton(false);

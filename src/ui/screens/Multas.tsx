@@ -16,7 +16,7 @@ const Multas = () => {
   const [cedula, setCedula] = useState("");
   // validez del input
   const [valid, setValid] = useState<boolean>();
-  // Hook de navegacion de react-router-dom
+  // Hook de navegacion de react-router-dom, se usa para navegar a la pantalla de los resultados de la consulta
   const navigate = useNavigate();
 
   // Validacion de datos del input
@@ -30,6 +30,7 @@ const Multas = () => {
 
   // Ejecutado al hacer submit con un valor de cedula valido
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
+    // Aqui se puede hacer la llamada a la API para obtener los datos de las multas
     e.preventDefault();
 
     console.log(cedula);
@@ -38,6 +39,7 @@ const Multas = () => {
 
   return (
     <div id="multas" className="container bottom-margin">
+      {/* Header con boton para navegar a la pagina anterior (BackButton) y titulo informativo */}
       <section id="header" className="row container mt-4">
         <div className="col-1">
           <BackButton />
@@ -47,6 +49,8 @@ const Multas = () => {
         </div>
       </section>
       <hr />
+
+      {/* Input de dato (cedula) */}
       <section
         id="cedulaInput"
         className="row container justify-content-center mb-4"
@@ -89,6 +93,8 @@ const Multas = () => {
           </div>
         </form>
       </section>
+
+      {/* Boton para enviar el form */}
       <section
         id="submit-button"
         className="row container justify-content-center"
@@ -104,7 +110,9 @@ const Multas = () => {
           </button>
         </div>
       </section>
-      <div className="row container position-fixed bottom-0 bottom-margin pb-5">
+
+      {/* Teclado Virtual */}
+      <section className="row container position-fixed bottom-0 bottom-margin pb-5">
         <Keyboard
           layout={SpanishLayout.layout}
           autoUseTouchEvents
@@ -128,7 +136,7 @@ const Multas = () => {
             handleValidation();
           }}
         />
-      </div>
+      </section>
     </div>
   );
 };

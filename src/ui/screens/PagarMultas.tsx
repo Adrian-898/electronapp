@@ -79,16 +79,19 @@ const PagarMultas = () => {
 
   return (
     <div id="pagarMultas" className="container bottom-margin">
-      <div className="row container mt-4">
+      {/* Header con titulo informativo y boton para regresar a la pagina anterior (BackButton) */}
+      <section className="row container mt-4">
         <div className="col-1">
           <BackButton />
         </div>
         <div className="col-10">
           <h1 className="text-center">Resultados de consulta</h1>
         </div>
-      </div>
+      </section>
       <hr />
-      <div className="row container">
+
+      {/* Tabla con los datos de la consulta */}
+      <section className="row container">
         <DataTable
           className="table table-light table-bordered table-group-divider table-striped border-primary-subtle"
           options={{
@@ -140,7 +143,7 @@ const PagarMultas = () => {
             </tr>
           </thead>
         </DataTable>
-      </div>
+      </section>
       <hr />
     </div>
   );
