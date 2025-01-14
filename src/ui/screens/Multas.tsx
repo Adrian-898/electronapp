@@ -8,7 +8,7 @@ import "./styles.css";
 
 // Expresion regular para validar el input
 const expression = {
-  cedula: /^\d{1,8}$/, // 1 a 8 numeros.
+  cedula: /^(?:[1-9][0-9]{0,7})$/, // 1 a 8 numeros.
 };
 
 const Multas = () => {
@@ -86,8 +86,8 @@ const Multas = () => {
                 className="text-danger fs-4 fw-bold mt-1"
                 hidden={valid === undefined}
               >
-                Debe contener de 1 a 8 números. Sin letras, signos o símbolos de
-                ningún tipo.
+                Debe contener de uno (1) a ocho (8) números (sin ceros a la
+                izquierda).
               </p>
             )}
           </div>
@@ -120,7 +120,6 @@ const Multas = () => {
           newLineOnEnter={false}
           tabCharOnTab={false}
           updateCaretOnSelectionChange
-          debug
           display={{
             ["{bksp}"]: "borrar",
             ["{enter}"]: "enter",

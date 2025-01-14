@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import type { IDetectedBarcode } from "@yudiel/react-qr-scanner";
 import getErrorMessage from "../../utils/getErrorMessage";
+import Keyboard from "react-simple-keyboard";
+import SpanishLayout from "simple-keyboard-layouts/build/layouts/spanish";
+import "react-simple-keyboard/build/css/index.css";
 
 const expression = {
-  puesto: /\b[1-9][0-9]*\b/,
+  puesto: /^(?:[1-9][0-9]{0,3})$/, // 1 a 4 numeros
 };
 
 const QRScanner = () => {
@@ -71,7 +74,7 @@ const QRScanner = () => {
   return (
     <div id="QRScanner" className="container p-5 bottom-margin">
       {/* Modal para input manual de datos */}
-      <section id="inputModal" className="modal fade">
+      <section id="inputModal" className="container-fluid modal fade">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <section className="modal-header">
@@ -134,8 +137,8 @@ const QRScanner = () => {
                         className="text-danger fs-4 fw-bold mt-1"
                         hidden={validPuesto === undefined}
                       >
-                        Debe contener uno o más números (sin ceros a la
-                        izquierda).
+                        Debe contener de uno (1) a cuatro (4) números (sin ceros
+                        a la izquierda).
                       </p>
                     )}
                   </div>
@@ -162,6 +165,31 @@ const QRScanner = () => {
             </section>
           </div>
         </div>
+
+        {/* Teclado Virtual */}
+        <section className="row container-fluid position-fixed bottom-0 bottom-margin">
+          <Keyboard
+            layout={SpanishLayout.layout}
+            autoUseTouchEvents
+            disableButtonHold
+            newLineOnEnter={false}
+            tabCharOnTab={false}
+            display={{
+              ["{bksp}"]: "borrar",
+              ["{enter}"]: "enter",
+              ["{shift}"]: "shift",
+              ["{lock}"]: "bloq. de mayús.",
+              ["{tab}"]: "tab",
+              ["{space}"]: " ",
+            }}
+            onChange={(e) => {
+              setPuesto(e);
+            }}
+            onKeyReleased={() => {
+              handleValidation();
+            }}
+          />
+        </section>
       </section>
 
       {/*header con mensaje de titulo*/}
