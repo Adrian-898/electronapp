@@ -16,8 +16,10 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/Map" element={<Map />} />
         <Route path="/QRScanner" element={<QRScanner />} />
+        {/* Rutas que se acceden desde los botones del HomePage: */}
         <Route path="/Multas" element={<Multas />} />
         <Route path="/PagarMultas" element={<PagarMultas />} />
+        {/* Cualquier otra ruta que no exista o no este definida aun: */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
