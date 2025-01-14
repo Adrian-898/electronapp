@@ -169,7 +169,7 @@ const QRScanner = () => {
         </div>
 
         {/* Teclado Virtual */}
-        <section className="row container-fluid position-fixed bottom-0 mb-2">
+        <section className="row container-fluid position-fixed bottom-0 pb-4 p-5">
           <Keyboard
             theme="hg-theme-default hg-layout-numeric numeric-theme"
             layout={{

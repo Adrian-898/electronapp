@@ -113,7 +113,7 @@ const Multas = () => {
       </section>
 
       {/* Teclado Virtual */}
-      <section className="row container position-fixed bottom-0 bottom-margin pb-5">
+      <section className="row container position-fixed bottom-0 bottom-margin p-5">
         <Keyboard
           theme="hg-theme-default hg-layout-numeric numeric-theme"
           layout={{
