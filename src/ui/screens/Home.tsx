@@ -20,7 +20,7 @@ const Home = () => {
               abajo podrás acceder a las secciones QR y Ubicación. Para salir al
               menú, presiona el botón "Cerrar".
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer justify-content-center">
               <button
                 type="button"
                 className="btn btn-secondary bg-gradient border-2 fs-1 fw-bold"
