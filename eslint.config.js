@@ -16,10 +16,10 @@ export default tseslint.config({
 	files: ['**/*.{ts,tsx}'],
 
 	languageOptions: {
-		ecmaVersion: 'latest',
+		ecmaVersion: 2020,
 		sourceType: 'module',
 		globals: {
-			...globals.browser,
+			...globals.node,
 		},
 		parserOptions: {
 			emitDecoratorMetadata: true,

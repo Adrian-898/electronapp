@@ -11,8 +11,8 @@
 		"dev:react": "vite",
 		"dev:electron": "npm run transpile:electron && cross-env NODE_ENV=development electron .",
 		"build": "tsc -b && vite build",
-		"format": "prettier --write .",
-		"lint": "eslint --fix .",
+		"format": "npx prettier --write .",
+		"lint": "npx eslint --fix .",
 		"preview": "vite preview",
 		"transpile:electron": "tsc --project src/electron/tsconfig.json",
 		"dist:win": "npm run transpile:electron && npm run build && electron-builder --win --x64"
