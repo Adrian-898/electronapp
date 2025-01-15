@@ -1,22 +1,22 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0;
-  height: 100vh;
-  width: 100%;
+	margin: 0;
+	height: 100vh;
+	width: 100%;
 }
 
 ::-webkit-scrollbar {
-  display: none; /* Hides the scrollbar */
+	display: none; /* Hides the scrollbar */
 }
 
 .tab-bar-icon {
-  font-size: 80px;
-  padding-right: 10px;
+	font-size: 80px;
+	padding-right: 10px;
 }

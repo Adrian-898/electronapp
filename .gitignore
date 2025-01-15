@@ -12,7 +12,6 @@ dist
 dist-react
 dist-electron
 *.local
-.prettierrc
 unused
 
 # Editor directories and files

@@ -1,36 +1,48 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
+import globals from 'globals';
+import pluginJs from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import pluginReact from 'eslint-plugin-react';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
-export default tseslint.config(
-  { ignores: ["dist"] },
-  {
-    settings: {
-      react: {
-        version: "18.3.1",
-      },
-    },
+export default tseslint.config({
+	ignores: ['dist', 'dist-electron', 'dist-react'],
 
-    files: ["**/*.{ts,tsx}"],
+	settings: {
+		react: {
+			version: '18.3',
+		},
+	},
 
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-    rules: {
-      "no-unused-vars": "warn",
-    },
-    extends: [
-      pluginJs.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked,
-      pluginReact.configs.flat.recommended,
-      pluginReact.rules["jsx-uses-react"],
-    ],
-  }
-);
+	files: ['**/*.{ts,tsx}'],
 
+	languageOptions: {
+		ecmaVersion: 'latest',
+		sourceType: 'module',
+		globals: {
+			...globals.browser,
+		},
+		parserOptions: {
+			emitDecoratorMetadata: true,
+			project: ['./tsconfig.node.json', './tsconfig.app.json'],
+			ecmaFeatures: {
+				jsx: true,
+			},
+			tsconfigRootDir: import.meta.dirname,
+		},
+	},
+	plugins: {
+		pluginJs,
+		pluginReact,
+		tseslint,
+	},
+	rules: {
+		'no-unused-vars': 'warn',
+	},
+	extends: [
+		pluginJs.configs.recommended,
+		...tseslint.configs.recommendedTypeChecked,
+		pluginReact.configs.flat.recommended,
+		pluginReact.rules['jsx-uses-react'],
+		eslintConfigPrettier,
+	],
+});
