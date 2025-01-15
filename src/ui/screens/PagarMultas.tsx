@@ -1,13 +1,13 @@
-import "jquery";
+import 'jquery';
 // import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 // import getErrorMessage from "../../utils/getErrorMessage";
-import BackButton from "../components/BackButton";
-import DataTable from "datatables.net-react";
-import DT from "datatables.net-bs5";
+import BackButton from '../components/BackButton';
+import DataTable from 'datatables.net-react';
+import DT from 'datatables.net-bs5';
 // import "datatables.net-buttons-bs5";
 // import "datatables.net-buttons/js/buttons.html5.mjs";
-import "./styles.css";
+import './styles.css';
 
 // Inicializa DataTables con estilos de Bootstrap 5
 DataTable.use(DT);
@@ -40,24 +40,24 @@ type User = {
 */
 
 const PagarMultas = () => {
-  // hook para acceder al estado enviado desde el componente padre (Multas.tsx)
-  const location = useLocation();
+	// hook para acceder al estado enviado desde el componente padre (Multas.tsx)
+	const location = useLocation();
 
-  // Estado de los datos de la tabla
-  // const [table, setTable] = useState<User[]>();
+	// Estado de los datos de la tabla
+	// const [table, setTable] = useState<User[]>();
 
-  // Cambia el orden de muestra de los datos por cada columna:
-  const cols = [
-    { data: "name" },
-    { data: "username" },
-    { data: "email" },
-    { data: "address.city" },
-    { data: "phone" },
-    { data: "website" },
-    { data: "company.name" },
-  ];
+	// Cambia el orden de muestra de los datos por cada columna:
+	const cols = [
+		{ data: 'name' },
+		{ data: 'username' },
+		{ data: 'email' },
+		{ data: 'address.city' },
+		{ data: 'phone' },
+		{ data: 'website' },
+		{ data: 'company.name' },
+	];
 
-  /*
+	/*
   useEffect(() => {
   // GET a la API para obtener los datos de la tabla, no se usa porque la propiedad ajax de DataTables maneja esto automaticamente...
     const listUsers = async () => {
@@ -77,76 +77,76 @@ const PagarMultas = () => {
   }, []);
 */
 
-  return (
-    <div id="pagarMultas" className="container bottom-margin">
-      {/* Header con titulo informativo y boton para regresar a la pagina anterior (BackButton) */}
-      <section className="row container mt-4">
-        <div className="col-1">
-          <BackButton />
-        </div>
-        <div className="col-10">
-          <h1 className="text-center">Resultados de consulta</h1>
-        </div>
-      </section>
-      <hr />
+	return (
+		<div id='pagarMultas' className='container bottom-margin'>
+			{/* Header con titulo informativo y boton para regresar a la pagina anterior (BackButton) */}
+			<section className='row container mt-4'>
+				<div className='col-1'>
+					<BackButton />
+				</div>
+				<div className='col-10'>
+					<h1 className='text-center'>Resultados de consulta</h1>
+				</div>
+			</section>
+			<hr />
 
-      {/* Tabla con los datos de la consulta */}
-      <section className="row container">
-        <DataTable
-          className="table table-light table-bordered table-group-divider table-striped border-primary-subtle"
-          options={{
-            autoWidth: false,
-            ordering: false,
-            columns: cols,
-            ajax: {
-              url: "https://jsonplaceholder.typicode.com/users",
-              // dataSrc: "", permite leer los datos recibidos del fetch cuando vienen en forma de array de objetos sin nombre.
-              dataSrc: "",
-            },
-            layout: {
-              topStart: {
-                div: {
-                  text: `Multas de: ${location.state}`,
-                  className: "fs-1",
-                },
-              },
-            },
-            language: {
-              processing: "Procesando...",
-              zeroRecords: "No hay multas para mostrar",
-              decimal: ",",
-              thousands: ".",
-              emptyTable: "Este usuario no tiene multas asignadas...",
-              loadingRecords: "Cargando información...",
-              infoEmpty: "No hay multas para mostrar",
-              infoFiltered: "",
-              info: "Mostrando _START_ a _END_ de _TOTAL_ _ENTRIES_",
-              search: "Buscar:",
-              searchPlaceholder: "Escribe aquí...",
-              lengthMenu: "Mostrar _MENU_ registros",
-              entries: {
-                _: "multas",
-                1: "multa",
-              },
-            },
-          }}
-        >
-          <thead>
-            <tr>
-              <th>Nombre Completo</th>
-              <th>Nombre de Usuario</th>
-              <th>E-Mail</th>
-              <th>Dirección</th>
-              <th>Teléfono</th>
-              <th>Sitio Web</th>
-              <th>Empresa</th>
-            </tr>
-          </thead>
-        </DataTable>
-      </section>
-      <hr />
-    </div>
-  );
+			{/* Tabla con los datos de la consulta */}
+			<section className='row container'>
+				<DataTable
+					className='table table-light table-bordered table-group-divider table-striped border-primary-subtle'
+					options={{
+						autoWidth: false,
+						ordering: false,
+						columns: cols,
+						ajax: {
+							url: 'https://jsonplaceholder.typicode.com/users',
+							// dataSrc: "", permite leer los datos recibidos del fetch cuando vienen en forma de array de objetos sin nombre.
+							dataSrc: '',
+						},
+						layout: {
+							topStart: {
+								div: {
+									text: `Multas de: ${location.state}`,
+									className: 'fs-1',
+								},
+							},
+						},
+						language: {
+							processing: 'Procesando...',
+							zeroRecords: 'No hay multas para mostrar',
+							decimal: ',',
+							thousands: '.',
+							emptyTable: 'Este usuario no tiene multas asignadas...',
+							loadingRecords: 'Cargando información...',
+							infoEmpty: 'No hay multas para mostrar',
+							infoFiltered: '',
+							info: 'Mostrando _START_ a _END_ de _TOTAL_ _ENTRIES_',
+							search: 'Buscar:',
+							searchPlaceholder: 'Escribe aquí...',
+							lengthMenu: 'Mostrar _MENU_ registros',
+							entries: {
+								_: 'multas',
+								1: 'multa',
+							},
+						},
+					}}
+				>
+					<thead>
+						<tr>
+							<th>Nombre Completo</th>
+							<th>Nombre de Usuario</th>
+							<th>E-Mail</th>
+							<th>Dirección</th>
+							<th>Teléfono</th>
+							<th>Sitio Web</th>
+							<th>Empresa</th>
+						</tr>
+					</thead>
+				</DataTable>
+			</section>
+			<hr />
+		</div>
+	);
 };
 
 export default PagarMultas;

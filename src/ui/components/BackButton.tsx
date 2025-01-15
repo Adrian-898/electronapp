@@ -1,25 +1,25 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const BackButton = () => {
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
-  const handleBack = () => {
-    if (window.history.length > 1) {
-      navigate(-1);
-    } else {
-      navigate("/");
-    }
-  };
+	const handleBack = () => {
+		if (window.history.length > 1) {
+			navigate(-1);
+		} else {
+			navigate('/');
+		}
+	};
 
-  return (
-    <div
-      className="btn-link start-0 top-0 m-0 p-0"
-      onClick={handleBack}
-      title="Regresar"
-    >
-      <i className="bi bi-arrow-return-left fs-1"></i>
-    </div>
-  );
+	return (
+		<div
+			className='btn-link start-0 top-0 m-0 p-0'
+			onClick={handleBack}
+			title='Regresar'
+		>
+			<i className='bi bi-arrow-return-left fs-1'></i>
+		</div>
+	);
 };
 
 export default BackButton;
