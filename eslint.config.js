@@ -13,16 +13,15 @@ export default tseslint.config({
 		},
 	},
 
-	files: ['**/*.{ts,tsx}'],
+	files: ['**/*.{js,jsx,ts,tsx}'],
 
 	languageOptions: {
-		ecmaVersion: 2020,
+		ecmaVersion: 'latest',
 		sourceType: 'module',
 		globals: {
 			...globals.node,
 		},
 		parserOptions: {
-			emitDecoratorMetadata: true,
 			project: ['./tsconfig.node.json', './tsconfig.app.json'],
 			ecmaFeatures: {
 				jsx: true,
@@ -30,19 +29,11 @@ export default tseslint.config({
 			tsconfigRootDir: import.meta.dirname,
 		},
 	},
+
 	plugins: {
-		pluginJs,
-		pluginReact,
-		tseslint,
-	},
-	rules: {
-		'no-unused-vars': 'warn',
-	},
-	extends: [
-		pluginJs.configs.recommended,
+		...pluginJs.configs.recommended,
 		...tseslint.configs.recommendedTypeChecked,
-		pluginReact.configs.flat.recommended,
-		pluginReact.rules['jsx-uses-react'],
+		...pluginReact.configs.flat.recommended,
 		eslintConfigPrettier,
-	],
+	},
 });
