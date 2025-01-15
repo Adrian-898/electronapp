@@ -1,8 +1,7 @@
-import js from "@eslint/js";
 import globals from "globals";
-import react from "eslint-plugin-react";
-import reactHooks from "eslint-plugin-react-hooks";
+import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
+import pluginReact from "eslint-plugin-react";
 
 export default tseslint.config(
   { ignores: ["dist"] },
@@ -12,12 +11,9 @@ export default tseslint.config(
         version: "18.3.1",
       },
     },
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked,
-      ...tseslint.configs.stylisticTypeChecked,
-    ],
+
     files: ["**/*.{ts,tsx}"],
+
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -26,15 +22,15 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
       },
     },
-    plugins: {
-      react,
-      reactHooks,
-    },
     rules: {
-      ...react.configs.recommended.rules,
-      ...react.configs["jsx-runtime"].rules,
-      ...reactHooks.configs.recommended.rules,
+      "no-unused-vars": "warn",
     },
+    extends: [
+      pluginJs.configs.recommended,
+      ...tseslint.configs.recommendedTypeChecked,
+      pluginReact.configs.flat.recommended,
+      pluginReact.rules["jsx-uses-react"],
+    ],
   }
 );
 
