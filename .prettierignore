@@ -1,2 +1,5 @@
+dist
+dist-electron
+dist-react
 package-lock.json
 README.md

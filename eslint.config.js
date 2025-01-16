@@ -9,14 +9,14 @@ export default tseslint.config({
 
 	settings: {
 		react: {
-			version: '18.3',
+			version: 'detect',
 		},
 	},
 
 	files: ['**/*.{js,jsx,ts,tsx}'],
 
 	languageOptions: {
-		ecmaVersion: 2024,
+		ecmaVersion: 2023,
 		sourceType: 'module',
 		globals: {
 			...globals.node,
@@ -27,6 +27,7 @@ export default tseslint.config({
 				jsx: true,
 			},
 			tsconfigRootDir: import.meta.dirname,
+			allowJs: true,
 		},
 	},
 
