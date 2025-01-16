@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Scanner } from '@yudiel/react-qr-scanner';
-import type { IDetectedBarcode } from '@yudiel/react-qr-scanner';
+import { type IDetectedBarcode } from '@yudiel/react-qr-scanner';
 import getErrorMessage from '../../utils/getErrorMessage';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
