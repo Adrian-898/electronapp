@@ -1,11 +1,18 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import TypescriptParser from '@typescript-eslint/parser';
 import pluginReact from 'eslint-plugin-react';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default tseslint.config({
-	ignores: ['dist', 'dist-electron', 'dist-react'],
+	ignores: [
+		'dist',
+		'dist-electron',
+		'dist-react',
+		'src/electron/main.ts',
+		'src/electron/util.ts',
+	],
 
 	settings: {
 		react: {
@@ -13,16 +20,17 @@ export default tseslint.config({
 		},
 	},
 
-	files: ['**/*.{js,jsx,ts,tsx}'],
+	files: ['**/*.{ts,tsx}'],
 
 	languageOptions: {
-		ecmaVersion: 2023,
 		sourceType: 'module',
 		globals: {
-			...globals.node,
+			...globals.browser,
 		},
+		parser: TypescriptParser,
 		parserOptions: {
 			project: ['./tsconfig.node.json', './tsconfig.app.json'],
+			ecmaVersion: 2023,
 			ecmaFeatures: {
 				jsx: true,
 			},
@@ -35,6 +43,6 @@ export default tseslint.config({
 		...pluginJs.configs.recommended,
 		...tseslint.configs.recommendedTypeChecked,
 		...pluginReact.configs.flat.recommended,
-		eslintConfigPrettier,
+		...eslintConfigPrettier,
 	},
 });
