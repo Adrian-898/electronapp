@@ -50,10 +50,10 @@ const PagarMultas = () => {
 	// Cambia el orden de muestra de los datos por cada columna:
 	const cols = [
 		{ data: 'name' },
-		{ data: 'username' },
 		{ data: 'email' },
 		{ data: 'address.city' },
 		{ data: 'phone' },
+		{ data: 'opciones' },
 	];
 
 	/*
@@ -90,9 +90,19 @@ const PagarMultas = () => {
 			<hr />
 
 			{/* Tabla con los datos de la consulta */}
-			<section className='row container'>
+			<section className='row container bottom-margin'>
 				<DataTable
-					className='table table-light table-bordered table-group-divider table-striped border-primary-subtle'
+					className='table table-light table-bordered table-group-divider table-striped border-primary-subtle fs-5'
+					slots={{
+						4: (_data: any) => (
+							<button
+								className='btn btn-primary bg-gradient border border-primary border-2 fs-5'
+								onClick={() => console.log('Boton Pagar presionado')}
+							>
+								Pagar <i className='bi bi-receipt fs-2'></i>
+							</button>
+						),
+					}}
 					options={{
 						select: {
 							style: 'os',
@@ -114,6 +124,7 @@ const PagarMultas = () => {
 									className: 'fs-1',
 								},
 							},
+							topEnd: null,
 						},
 						language: {
 							processing: 'Procesando...',
@@ -137,11 +148,11 @@ const PagarMultas = () => {
 				>
 					<thead>
 						<tr>
-							<th>Nombre Completo</th>
-							<th>Nombre de Usuario</th>
-							<th>E-Mail</th>
+							<th>Nombre</th>
+							<th>Descripción</th>
 							<th>Dirección</th>
-							<th>Teléfono</th>
+							<th>Estatus</th>
+							<th>Opciones</th>
 						</tr>
 					</thead>
 				</DataTable>
