@@ -1,11 +1,12 @@
 import 'jquery';
-// import { useState } from "react";
+// import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 // import getErrorMessage from "../../utils/getErrorMessage";
 import BackButton from '../components/BackButton';
 import DataTable from 'datatables.net-react';
 import DT from 'datatables.net-bs5';
-// import "datatables.net-buttons-bs5";
+import 'datatables.net-select-bs5';
+import 'datatables.net-buttons-bs5';
 // import "datatables.net-buttons/js/buttons.html5.mjs";
 import './styles.css';
 
@@ -53,8 +54,6 @@ const PagarMultas = () => {
 		{ data: 'email' },
 		{ data: 'address.city' },
 		{ data: 'phone' },
-		{ data: 'website' },
-		{ data: 'company.name' },
 	];
 
 	/*
@@ -95,6 +94,11 @@ const PagarMultas = () => {
 				<DataTable
 					className='table table-light table-bordered table-group-divider table-striped border-primary-subtle'
 					options={{
+						select: {
+							style: 'os',
+							className: 'table-primary',
+							info: false,
+						},
 						autoWidth: false,
 						ordering: false,
 						columns: cols,
@@ -138,8 +142,6 @@ const PagarMultas = () => {
 							<th>E-Mail</th>
 							<th>Dirección</th>
 							<th>Teléfono</th>
-							<th>Sitio Web</th>
-							<th>Empresa</th>
 						</tr>
 					</thead>
 				</DataTable>
