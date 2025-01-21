@@ -1,13 +1,11 @@
 import 'jquery';
 // import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 // import getErrorMessage from "../../utils/getErrorMessage";
+import { useLocation } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import DataTable from 'datatables.net-react';
 import DT from 'datatables.net-bs5';
 import 'datatables.net-select-bs5';
-import 'datatables.net-buttons-bs5';
-// import "datatables.net-buttons/js/buttons.html5.mjs";
 import './styles.css';
 
 // Inicializa DataTables con estilos de Bootstrap 5
