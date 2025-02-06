@@ -13,10 +13,13 @@ const expression = {
 const Multas = () => {
 	// valor del input
 	const [cedula, setCedula] = useState('');
+
 	// validez del input
 	const [valid, setValid] = useState<boolean>();
+
 	// Hook de navegacion de react-router-dom, se usa para navegar a la pantalla de los resultados de la consulta
 	const navigate = useNavigate();
+
 	// tipo de teclado activo
 	const [keyboardLayout, setKeyboardLayout] = useState(false);
 
