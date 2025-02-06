@@ -11,9 +11,9 @@ import 'leaflet/dist/leaflet.css';
 import L, { type Map, type Icon } from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
-import PersonIcon from '../assets/images/person-standing.svg';
-import MarkerIcon from '../assets/images/marker.svg';
-import Shadow from '../assets/images/marker-shadow.png';
+import PersonIcon from '../../assets/images/person-standing.svg';
+import MarkerIcon from '../../assets/images/marker.svg';
+import Shadow from '../../assets/images/marker-shadow.png';
 import './styles.css';
 
 // objeto para almacenar informacion de los lugares que se quiere marcar en el mapa

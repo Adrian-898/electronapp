@@ -3,7 +3,7 @@
 	"author": "Adrian Torres",
 	"description": "App La Guaira para Windows",
 	"private": true,
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"type": "module",
 	"main": "dist-electron/main.js",
 	"scripts": {
